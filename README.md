@@ -11,6 +11,8 @@ El objetivo de este dojo es implementar parcialmente el modelo del juego [Pacman
 5. Pacman choca contra un fantasma debilitado y no muero. Adicionalmente la digestión es el fantasma sin cuerpo.
 6. Pacman choca contra un fantasma sin cuerpo y no muere.
 
+7. Pacman como un maracuya y vuela evitando a los fantansmas. Este efecto se prolonga el resto de la partida.
+
 ### Metodología
 
 Programación orientada a objetos + ATDD
