@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/martinCastello/Inscripcion.svg?branch=master)](https://travis-ci.org/martinCastello/Inscripcion)
+
 Inscripción Materias UNQ
 
 ### Integrantes
@@ -12,7 +14,7 @@ Nro | Nombre        | Legajo | Mail
 
 ## Inscripción
 
-El objetivo de implementar parcialmente el modelo de Inscripción de Materias de la Universidad Nacional de Quilmes.
+El objetivo es implementar parcialmente el modelo de Inscripción de Materias de la Universidad Nacional de Quilmes.
 
 ### Pruebas de aceptación
 
