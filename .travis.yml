@@ -2,3 +2,6 @@ language: java
 
 services:
   - mysql
+
+before_script:
+  - mysql -utravis < src/resources/database/schema_creation.sql
