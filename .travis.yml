@@ -3,6 +3,6 @@ language: java
 services:
   - mysql
 
-before_script:
+before_install:
   - mysql -utravis < src/main/resources/database/schema_creation.sql
   - mysql -utravis < src/main/resources/database/user.sql
