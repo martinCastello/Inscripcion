@@ -6,6 +6,11 @@ env:
 services:
   - mysql
 
+before_install:
+  - bash .travis.install-mysql-5.7
+  - gem update --system 2.6.11
+  - gem update bundler
+
 before_script:
   - mysql -utravis < src/main/resources/database/schema_creation.sql
   - mysql -utravis < src/main/resources/database/user.sql
@@ -13,6 +18,8 @@ before_script:
 
 #script:
 #  - bundle exec rake db:schema:load
+#  - bundle exec rake db:create
+
 #  - bundle exec rake db:test:prepare
 #  - bundle exec rake spec
 
