@@ -19,9 +19,9 @@ before_install:
   - gem update --system 2.6.11
   - gem update bundler
 
-install:
-  - bundle install --path vendor/bundle
-  - npm install
+#install:
+#  - bundle install --path vendor/bundle
+#  - npm install
 
 before_script:
   - mysql -utravis < src/main/resources/database/schema_creation.sql
@@ -31,7 +31,7 @@ before_script:
 
 script:
 #  - bundle exec rake db:schema:load
-  - bundle exec rake db:create
+#  - bundle exec rake db:create
 
 #  - bundle exec rake db:test:prepare
 #  - bundle exec rake spec
