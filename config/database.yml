@@ -3,3 +3,8 @@ test:
   database: inscripcion
   username: travis
   encoding: utf8
+cucumber:
+  adapter: mysql2
+  database: inscripcion
+  username: travis
+  encoding: utf8
