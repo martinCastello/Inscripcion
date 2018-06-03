@@ -6,4 +6,14 @@ services:
 before_script:
   - mysql -utravis < src/main/resources/database/schema_creation.sql
   - mysql -utravis < src/main/resources/database/user.sql
-  - cp ./.travis.database.yml ./config/database.yml
+#  - "cp ./.travis.database.yml ./config/database.yml"
+
+script:
+  - bundle exec rake db:schema:load
+  - bundle exec rake db:test:prepare
+  - bundle exec rake spec
+after_failure:
+  - "mysql -e 'show databases;'"
+  - "cat ./config/database.yml"
+  - "echo $RAILS_ENV"
+  - "bundle exec rake --version"
