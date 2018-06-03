@@ -3,6 +3,7 @@ language: java
 services:
   - mysql
 
-before_install:
+before_script:
   - mysql -utravis < src/main/resources/database/schema_creation.sql
   - mysql -utravis < src/main/resources/database/user.sql
+  - "cp ./.travis.database.yml ./config/database.yml"
