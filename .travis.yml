@@ -1,5 +1,8 @@
 language: java
 
+env:
+  - RAILS_ENV=test
+
 services:
   - mysql
 
