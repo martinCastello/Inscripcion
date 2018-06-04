@@ -30,7 +30,7 @@ before_script:
 #  - mysql -e "USE mysql;
   - mysql -e 'USE mysql;' #@MartinCastello
 #      DROP TABLE IF EXISTS usuario;
-  - mysql -e 'DROP TABLE IF EXISTS usuario;'
+#  - mysql -e 'DROP TABLE IF EXISTS usuario;' #Se comenta porque falla en travis.
 #  CREATE TABLE IF NOT EXISTS `usuario` (
 #    `id` int(11) NOT NULL AUTO_INCREMENT,
 #    `nombre` varchar(50) DEFAULT NULL,
