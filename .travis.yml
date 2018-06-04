@@ -4,4 +4,14 @@ services:
   - mysql
 
 before_script:
-  - mysql -utravis < src/resources/database/schema_creation.sql
+  - mysql -e 'CREATE DATABASE instricpcion'
+  - mysql -e 'use instricpcion;'
+   - mysql -e "USE mysql;
+      DROP TABLE IF EXISTS usuario;
+  CREATE TABLE IF NOT EXISTS `usuario` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `nombre` varchar(50) DEFAULT NULL,
+    `apellido` varchar(50) DEFAULT NULL,
+    `legajo` varchar(50) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
