@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/martinCastello/Inscripcion.svg?branch=master)](https://travis-ci.org/martinCastello/Inscripcion)
+[![Build Status](https://travis-ci.org/eogp/Inscripcion.svg?branch=master)](https://travis-ci.org/eogp/Inscripcion)
 
 Inscripción Materias UNQ
 
