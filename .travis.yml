@@ -1,30 +1,30 @@
 language: java
 
-env:
-  - RAILS_ENV=test
+#env:
+#  - RAILS_ENV=test
 
 services:
   - mysql
 
-addons:
-  apt:
-    sources:
-      - mysql-5.7-trusty
-    packages:
-      - mysql-server
-      - mysql-client
+#addons:
+#  apt:
+#    sources:
+#      - mysql-5.7-trusty
+#    packages:
+#      - mysql-server
+#      - mysql-client
 
-before_install:
+#before_install:
 #  - bash .travis.install-mysql-5.7
-  - gem update --system 2.6.11
-  - gem update bundler
+#  - gem update --system 2.6.11
+#  - gem update bundler
 
 #install:
 #  - bundle install --path vendor/bundle
 #  - npm install
 
 before_script:
-  - mysql -e 'CREATE DATABASE instricpcion'
+  - mysql -e 'CREATE DATABASE instricpcion;'
   - mysql -e 'use instricpcion;'
   - mysql -e "USE mysql;
       DROP TABLE IF EXISTS usuario;
