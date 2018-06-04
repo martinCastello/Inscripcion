@@ -41,7 +41,7 @@ before_script:
 
 #  - mysql -e 'CREATE TABLE usuario (id int(11) NOT NULL AUTO_INCREMENT, apellido varchar(50) DEFAULT NULL, legajo varchar(50) DEFAULT NULL, PRIMARY KEY (id), ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3;'
 #Se comento lo de arriba por error en travis, entonces llamo a archivo usuario.sql
-  - mysql -u root < src/main/resources/database/usuario.sql
+  - mysql -uroot < src/main/resources/database/usuario.sql
 
 #  - mysql -utravis < src/main/resources/database/schema_creation.sql
 #  - mysql -utravis < src/main/resources/database/user.sql
