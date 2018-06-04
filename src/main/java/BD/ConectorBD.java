@@ -12,8 +12,8 @@ public class ConectorBD {
             String driverName = "com.mysql.jdbc.Driver";
             Class.forName(driverName); // here is the ClassNotFoundException
 
-            String serverName = "localhost";
-            String mydatabase = "inscripcion";
+            String serverName = "127.0.0.1";
+            String mydatabase = "instricpcion";
             String url = "jdbc:mysql://" + serverName + "/" + mydatabase;
 
             String username = "root";
