@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS inscripcion;
+CREATE DATABASE inscripcion;
