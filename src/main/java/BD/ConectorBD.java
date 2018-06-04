@@ -21,7 +21,7 @@ public class ConectorBD {
             connection = DriverManager.getConnection(url, username, password);
         }catch (SQLException e){
             System.out.println(e.getMessage());
-        }catch (SQLException e){
+        }catch (Exception e){
             System.out.println(e.getMessage());
         }
 
