@@ -28,7 +28,7 @@ before_script:
   - mysql -e 'CREATE DATABASE instricpcion;'
   - mysql -e 'use instricpcion;'
 #  - mysql -e "USE mysql;
-  - mysql -e 'USE mysql;' #@MartinCastello
+#  - mysql -e 'USE mysql;' #Se comenta porque para crear la tabla usuario necesita database instripcion
 #      DROP TABLE IF EXISTS usuario;
 #  - mysql -e 'DROP TABLE IF EXISTS usuario;' #Se comenta porque falla en travis.
 #  CREATE TABLE IF NOT EXISTS `usuario` (
