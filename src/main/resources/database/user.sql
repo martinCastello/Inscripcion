@@ -1,6 +1,6 @@
 USE inscripcion;
 
-CREATE TABLE usuario (
+CREATE TABLE user (
   name VARCHAR(255) NOT NULL,
   surname VARCHAR(255) NOT NULL,
   username VARCHAR(255) NOT NULL,
