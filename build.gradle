@@ -24,6 +24,9 @@ dependencies {
     testCompile 'io.cucumber:cucumber-junit:2.4.0'
 
     testCompile 'junit:junit:4.12'
+
+    compile fileTree(dir: 'libs', include:'*.jar')
+
 }
 
 repositories {
