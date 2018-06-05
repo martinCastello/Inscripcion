@@ -27,6 +27,8 @@ dependencies {
 
     compile fileTree(dir: 'libs', include:'*.jar')
 
+    compile 'mysql:mysql-connector-java:5.1.39'
+
 }
 
 repositories {
