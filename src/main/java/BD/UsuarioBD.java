@@ -11,12 +11,13 @@ public class UsuarioBD {
     public void insertar(Usuario usuario) {
         try{
 
-            PreparedStatement pstat = cn.prepareStatement("INSERT INTO usuario(id, nombre, apellido, legajo) VALUES (?,?,?,?)");
+            PreparedStatement pstat = cn.prepareStatement("INSERT INTO usuario(id, nombre, apellido, legajo, perfil) VALUES (?,?,?,?,?)");
 
             pstat.setString(1, null);
             pstat.setString(2, usuario.getNombre());
             pstat.setString(3, usuario.getApellido());
             pstat.setString(4, usuario.getLegajo());
+            pstat.setString(5, usuario.getPerfil());
 
             //Se ejecuta el query de envío de datos
             pstat.execute();
@@ -34,7 +35,11 @@ public class UsuarioBD {
             pstat.setString(1, legajo);
             ResultSet rs = pstat.executeQuery();
             while (rs.next()) {
-                usuario = new Usuario(rs.getString("id"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("legajo"));
+                usuario = new Usuario(rs.getString("id"),
+                        rs.getString("nombre"),
+                        rs.getString("apellido"),
+                        rs.getString("legajo"),
+                        rs.getString("perfil"));
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
