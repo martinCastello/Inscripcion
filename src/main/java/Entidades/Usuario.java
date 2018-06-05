@@ -5,12 +5,14 @@ public class Usuario {
     private String nombre;
     private String apellido;
     private String legajo;
+    private String perfil;
 
-    public Usuario(String id, String nombre, String apellido, String legajo) {
+    public Usuario(String id, String nombre, String apellido, String legajo, String perfil) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.legajo = legajo;
+        this.perfil = perfil;
     }
 
     public String getId() {
@@ -45,6 +47,14 @@ public class Usuario {
         this.legajo = legajo;
     }
 
+    public String getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -52,6 +62,7 @@ public class Usuario {
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", legajo='" + legajo + '\'' +
+                ", perfil='" + perfil + '\'' +
                 '}';
     }
 }
