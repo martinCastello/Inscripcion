@@ -18,16 +18,7 @@ El objetivo es implementar parcialmente el modelo de Inscripción de Materias de
 
 ### Pruebas de aceptación
 
-1. Pacman come un biscuit se vuelve más gordo (suma puntos).
-2. Pacman come una fruta se vuelve más gordo (suma puntos).
-3. Pacman choca contra un fantasma y muere.
-4. Pacman come un pellet y los fantasmas se debilitan.
-5. Pacman choca contra un fantasma debilitado y no muero. Adicionalmente la digestión es el fantasma sin cuerpo.
-6. Pacman choca contra un fantasma sin cuerpo y no muere.
-
-7. Pacman como un maracuya y vuela evitando a los fantansmas. Este efecto se prolonga el resto de la partida.
-
-NOTA: El requerimiento (7) solo aplica para aquellos grupos de 5 integrantes.
+1. 
 
 ### Metodología
 
@@ -39,9 +30,17 @@ NOTA: El requerimiento (7) solo aplica para aquellos grupos de 5 integrantes.
 ### Pasos
 
 1. Se importó proyecto eis_201801c_tp_grupal para tener insertarle travis(integración continua) sin problemas.
-2. 
-3. 
-4. 
+2. Se le dio permiso de acceso a travis para "gradlew" a través de la ejecución de la siguiente sentencia desde la consola: 
+    git update-index --chmod=+x gradlew
+   La otra opción es en travis agregar: 
+    before_install:
+    - chmod +x gradlew
+   Lo bueno de este tipo de solución no cambia el permiso en su repositorio git, sino que simplemente cambia el tiempo de ejecución de      los permisos en la ejecución.
+3. Se estuvo probando travis, para revisar las sentencias que tomaba como validas y que devovía.
+4. Se realizó la conexión de la base de datos de manera local. Se descartó el uso de hibernate por su complejidad con travis. 
+5. Con la metodología "prueba y error" hicimos andar travis.
+
+### Para tener en cuenta
+- bundle para cucumber en travis.
 
 [1]: https://travis-ci.org/
-[2]: 
