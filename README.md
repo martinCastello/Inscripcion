@@ -10,7 +10,13 @@ Nro | Nombre        | Legajo | Mail
 2   |Martin Castello|        |castellomn94@gmail.com
 3   |Susana Lopez   |        |s.mariel.lopez1995@gmail.com
 4   |Omar Gomez     |        |eo-gp@hotmail.com
-    
+
+##Backlog
+![backlog](https://user-images.githubusercontent.com/31358718/41069803-df3a167a-69c5-11e8-8ac5-bf8bd747ec24.png)
+
+##Burndown chart
+![34537605_2219213071437092_6950992741341855744_n](https://user-images.githubusercontent.com/31358718/41069958-89f57956-69c6-11e8-8838-70840cbeb3f8.png)
+
 
 ## Inscripción
 
