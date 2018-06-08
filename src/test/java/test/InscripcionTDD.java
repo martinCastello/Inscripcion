@@ -1,7 +1,8 @@
 package test;
 
+import BD.MateriaBD;
 import BD.UsuarioBD;
-import Entidades.Usuario;
+import Entidades.*;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -24,6 +25,15 @@ public class InscripcionTDD {
         assertEquals("456", usuario.getLegajo());
 
     }
+
+    @Test
+    public void  consultaMateri(){
+        MateriaBD materiaBD = new MateriaBD();
+        materiaBD.insertar(new Materia(null, "Matematica", 32, 12,  "Lunes de 8 a 12, Miercoles de 12 a 16, Viernes de 10 a 14", 214));
+        Materia matematica = materiaBD.buscarPorNombre("Matematica");
+        assertEquals("Matematica", matematica.getNombre());
+    }
+
 
 
 
