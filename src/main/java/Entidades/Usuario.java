@@ -1,26 +1,19 @@
 package Entidades;
 
 public class Usuario {
-    private String id;
+    private int legajo;
     private String nombre;
     private String apellido;
-    private String legajo;
-    private String perfil;
+    private String mail;
+    private String password;
+    private Usuario perfil;
 
-    public Usuario(String id, String nombre, String apellido, String legajo, String perfil) {
-        this.id = id;
+    public Usuario(int legajo, String nombre, String apellido, String mail, String password) {
+        this.legajo = legajo;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.legajo = legajo;
-        this.perfil = perfil;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+        this.mail = mail;
+        this.password = password;
     }
 
     public String getNombre() {
@@ -39,30 +32,45 @@ public class Usuario {
         this.apellido = apellido;
     }
 
-    public String getLegajo() {
+    public int getLegajo() {
         return legajo;
     }
 
-    public void setLegajo(String legajo) {
+    public void setLegajo(int legajo) {
         this.legajo = legajo;
     }
 
-    public String getPerfil() {
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String mail) {
+        this.password = password;
+    }
+
+    public void setPerfil(Usuario usuario){
+        this.perfil = usuario;
+    }
+
+    public Usuario getPerfil() {
         return perfil;
     }
 
-    public void setPerfil(String perfil) {
-        this.perfil = perfil;
-    }
+    //@Override
+    //public String toString() {
+    //    return "Usuario{" +
+    //            ", nombre='" + nombre + '\'' +
+    //            ", apellido='" + apellido + '\'' +
+    //            ", legajo='" + legajo + '\'' +
+    //            '}';
+    //}
 
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id='" + id + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", legajo='" + legajo + '\'' +
-                ", perfil='" + perfil + '\'' +
-                '}';
-    }
 }
