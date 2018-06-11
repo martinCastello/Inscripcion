@@ -28,7 +28,7 @@ public class InscripcionTDD {
     }
 
     @Test
-    public void  consultaMateri(){
+    public void  consultaMateria(){
         MateriaBD materiaBD = new MateriaBD();
         materiaBD.insertar(new Materia(null, "Matematica", 32, 12,  "Lunes de 8 a 12, Miercoles de 12 a 16, Viernes de 10 a 14", 214));
         Materia matematica = materiaBD.buscarPorNombre("Matematica");
