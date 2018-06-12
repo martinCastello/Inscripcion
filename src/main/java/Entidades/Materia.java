@@ -1,67 +1,47 @@
 package Entidades;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Materia {
 
-    private String id;
+    private int id;
     private String nombre;
-    private int cupo;
     private int carga_horaria;
-    private String dias_y_horarios_de_cursadas;
-    private int nro_aula;
 
-    public  Materia (String id, String nomb, int cup, int cant_horas, String dia_y_horarios, int aula){
+    public Materia(int id, String nombre, int carga_horaria) {
         this.id = id;
-        this.nombre = nomb;
-        this.cupo = cup;
-        this.carga_horaria = cant_horas;
-        this.dias_y_horarios_de_cursadas= dia_y_horarios;
-        this.nro_aula= aula;
+        this.nombre = nombre;
+        this.carga_horaria = carga_horaria;
     }
 
-    public String  getId(){
-        return  this.id;
+    public int getId() {
+        return id;
     }
 
-    public String getNombre(){
-        return  this.nombre;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public int getCarga_horaria() {
-        return this.carga_horaria;
+        return carga_horaria;
     }
 
-    public int getCupo() {
-        return cupo;
+    public void setCarga_horaria(int carga_horaria) {
+        this.carga_horaria = carga_horaria;
     }
 
-    public int getNro_aula() {
-        return this.nro_aula;
-    }
-
-    public String getDias_y_horarios_de_cursadas() {
-        return this.dias_y_horarios_de_cursadas;
-    }
-
-    public void setDias_y_horarios_de_cursadas(String dias_y_horarios_de_cursadas) {
-        this.dias_y_horarios_de_cursadas = dias_y_horarios_de_cursadas;
-    }
-
-    public void setNro_aula(int nro_aula) {
-        this.nro_aula= nro_aula;
-    }
-
-@Override
+    @Override
     public String toString() {
         return "Materia{" +
                 "id='" + id + '\'' +
                 ", nombre='" + nombre + '\'' +
-                ", cupo ='" + cupo + '\'' +
-                ", carga horaria='" + carga_horaria + '\'' +
-                ", aula ='" + nro_aula + '\'' +
-                ", dias_y_horarios_de_cursadass ='" + dias_y_horarios_de_cursadas + '\'' +
+                ", carga_horaria=" + carga_horaria +
                 '}';
     }
 }

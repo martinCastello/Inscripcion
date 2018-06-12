@@ -1,19 +1,26 @@
 package Entidades;
 
-public class Usuario {
-    private int legajo;
+public class Profesor {
+    private int id;
     private String nombre;
     private String apellido;
     private String mail;
     private String password;
-    private Usuario perfil;
 
-    public Usuario(int legajo, String nombre, String apellido, String mail, String password) {
-        this.legajo = legajo;
+    public Profesor(int id, String nombre, String apellido, String mail, String password) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.mail = mail;
         this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -32,14 +39,6 @@ public class Usuario {
         this.apellido = apellido;
     }
 
-    public int getLegajo() {
-        return legajo;
-    }
-
-    public void setLegajo(int legajo) {
-        this.legajo = legajo;
-    }
-
     public String getMail() {
         return mail;
     }
@@ -52,25 +51,18 @@ public class Usuario {
         return password;
     }
 
-    public void setPassword(String mail) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setPerfil(Usuario usuario){
-        this.perfil = usuario;
+    @Override
+    public String toString() {
+        return "Profesor{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", mail='" + mail + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
-
-    public Usuario getPerfil() {
-        return perfil;
-    }
-
-    //@Override
-    //public String toString() {
-    //    return "Usuario{" +
-    //            ", nombre='" + nombre + '\'' +
-    //            ", apellido='" + apellido + '\'' +
-    //            ", legajo='" + legajo + '\'' +
-    //            '}';
-    //}
-
 }

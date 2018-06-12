@@ -1,6 +1,3 @@
-import BD.UsuarioBD;
-import Entidades.Usuario;
-
 import java.util.Scanner;
 
 public class Main {
