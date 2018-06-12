@@ -1,15 +1,15 @@
-import BD.UsuarioBD;
-import Entidades.Usuario;
+import java.util.Scanner;
 
 public class Main {
 
-    public static void main (String [ ] args) {
-        System.out.println ("Empezamos la ejecución del programa");
-        //UsuarioBD usuarioBD=new UsuarioBD();
-        //usuarioBD.insertar(new Usuario(null, "Omar", "Gomez","123"));
-        //Usuario usuario=usuarioBD.buscarPorLegajo("123");
-        //System.out.println ("Usuario: "+usuario.toString());
-        System.out.println ("Finalizamos la ejecución del programa");
-
+    public static void main(String[] args) {
+        //Creación de un objeto Scanner
+        Scanner entradaEscaner = new Scanner(System.in);
+        Menus menus = new Menus();
+        menus.menuPrincipal();
+        //Invocamos un método sobre un objeto Scanner
+        String entradaTeclado = entradaEscaner.nextLine ();
     }
+
 }
+
