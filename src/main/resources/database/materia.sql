@@ -1,6 +1,6 @@
 use instricpcion;
 
-CREATE TABLE (
+CREATE TABLE `materia`(
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) DEFAULT NULL,
   `carga_horaria` int(11) DEFAULT NULL,
