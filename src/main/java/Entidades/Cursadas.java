@@ -7,13 +7,15 @@ public class Cursadas {
     private int materia_id;
     private String nro_aula;
     private int cupo;
+    private int comision;
 
-    public Cursadas(int id, String dias_y_horarios, int materia_id, String nro_aula, int cupo) {
+    public Cursadas(int id, String dias_y_horarios, int materia_id, String nro_aula, int cupo, int comision) {
         this.id = id;
         this.dias_y_horarios = dias_y_horarios;
         this.materia_id = materia_id;
         this.nro_aula = nro_aula;
         this.cupo = cupo;
+        this.comision = comision;
     }
 
     public int getId() {
@@ -64,6 +66,11 @@ public class Cursadas {
                 ", materia_id=" + materia_id +
                 ", nro_aula='" + nro_aula + '\'' +
                 ", cupo=" + cupo +
+                ", comision="+ comision+
                 '}';
+    }
+
+    public int getComision() {
+        return this.comision;
     }
 }
