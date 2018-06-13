@@ -1,6 +1,6 @@
 use instricpcion;
 
-CREATE TABLE `profesor` (
+CREATE TABLE `profesor`(
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   `apellido` varchar(45) NOT NULL,
