@@ -1,56 +1,15 @@
 package Entidades;
 
-public class Alumno {
-    private int id;
-    private String nombre;
-    private String apellido;
-    private int legajo;
+public class Alumno extends  User{
+
     private int regular;
-    private String mail;
-    private String password;
 
 
     public Alumno(int id, String nombre, String apellido, int legajo, int regular, String mail, String password) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.legajo = legajo;
-        this.regular = regular;
-        this.mail = mail;
-        this.password = password;
+       super (id,nombre,apellido,legajo,mail,password);
+       this.regular= regular;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public int getLegajo() {
-        return legajo;
-    }
-
-    public void setLegajo(int legajo) {
-        this.legajo = legajo;
-    }
 
     public int getRegular() {
         return regular;
@@ -60,32 +19,16 @@ public class Alumno {
         this.regular = regular;
     }
 
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     @Override
     public String toString() {
         return "Alumno{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", legajo=" + legajo +
+                "id=" + super.getId() +
+                ", nombre='" + super.getNombre() + '\'' +
+                ", apellido='" + super.getApellido() + '\'' +
+                ", legajo=" + super.getLegajo() +
                 ", regular=" + regular +
-                ", mail='" + mail + '\'' +
-                ", password='" + password + '\'' +
+                ", mail='" + super.getMail() + '\'' +
+                ", password='" + super.getPassword() + '\'' +
                 '}';
     }
 }
