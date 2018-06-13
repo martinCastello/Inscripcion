@@ -35,6 +35,7 @@ public class InscripcionTDD {
 
         assertEquals("Matematica", matematica.getNombre());
     }
+
     @Test
     public void consultarCursda(){
         MateriaBD materiaBD= new MateriaBD();
@@ -45,7 +46,7 @@ public class InscripcionTDD {
         Cursadas cursada_mat2 = cursadasBD.buscarPorAula("37B");
 
         assertEquals("lunes de 12 a 15", cursada_mat2.getDias_y_horarios());
-        //assert(true);
+        
     }
     @Test
     public  void consultarInscripcion(){
@@ -74,9 +75,8 @@ public class InscripcionTDD {
         assertEquals (cursada_matBD.getId(), i.getCursada_id());
 
     }
-
-
-    }
+        
+}
 
 
 
