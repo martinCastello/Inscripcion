@@ -35,7 +35,7 @@ public class InscripcionTDD {
 
         assertEquals("Matematica", matematica.getNombre());
     }
-    /*@Test
+    @Test
     public void consultarCursda(){
         MateriaBD materiaBD= new MateriaBD();
         materiaBD.insertar(new Materia(0,"Matematica2",15));
@@ -59,15 +59,21 @@ public class InscripcionTDD {
         Materia matBD= materiaBD.buscarPorNombre("OOP1");
         Alumno aluBD= alumnoBD.buscarPorLegajo(122);
 
-        Inscripciones inscripciones= new Inscripciones(0, aluBD.getId(), matBD.getId());
+        CursadasBD cursadasBD= new CursadasBD();
+        cursadasBD.insertar(new Cursadas(0,"lunes de 12 a 15",matBD.getId(),"37B",30,1));
+        Cursadas cursada_matBD = cursadasBD.buscarPorAula("37B");
+
+        Inscripciones inscripciones= new Inscripciones(0, aluBD.getId(), cursada_matBD.getId());
 
         InscripcionesBD inscripcionesBD= new InscripcionesBD();
         inscripcionesBD.insertar(inscripciones);
        Inscripciones i=  inscripcionesBD.buscar(aluBD.getId());
 
-        assertEquals (matBD.getId(), i.getCursada_id());
 
-    }*/
+
+        assertEquals (cursada_matBD.getId(), i.getCursada_id());
+
+    }
 
 
     }
