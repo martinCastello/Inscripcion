@@ -1,11 +1,14 @@
 package BD;
 
 import Entidades.Cursadas;
+import Entidades.Materia;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CursadasBD {
     ConectorBD cc = new ConectorBD();
@@ -15,7 +18,7 @@ public class CursadasBD {
         try{
 
             PreparedStatement pstat = cn.prepareStatement(
-                    "INSERT INTO cursadas(id, dias_y_horarios, materia_id, nro_aula, cupo, comision)" +
+                    "INSERT INTO cursadas(id, dias_y_horarios, materia_id, nro_aula, cupo, profesor_id)" +
                             " VALUES (?,?,?,?,?,?)");
 
             pstat.setString(1, null);
@@ -23,8 +26,7 @@ public class CursadasBD {
             pstat.setInt(3, cursadas.getMateria_id());
             pstat.setString(4, cursadas.getNro_aula());
             pstat.setInt(5, cursadas.getCupo());
-
-            pstat.setInt(6, cursadas.getComision());
+            pstat.setInt(6, cursadas.getProfesor_id());
 
             //Se ejecuta el query de envío de datos
             pstat.execute();
@@ -34,6 +36,32 @@ public class CursadasBD {
         }
     }
 
+
+    public List<Cursadas> listar(){
+
+        List<Cursadas> cursadas=new ArrayList<Cursadas>();
+        try {
+            PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  cursadas");
+
+            ResultSet rs = pstat.executeQuery();
+
+            while (rs.next()) {
+                cursadas.add(new Cursadas(
+                        rs.getInt("id"),
+                        rs.getString("dias_y_horarios"),
+                        rs.getInt("materia_id"),
+                        rs.getString("nro_aula"),
+                        rs.getInt("cupo"),
+                        rs.getInt("profesor_id")
+                        )
+                );
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return cursadas;
+    }
 
     public Cursadas buscarPorAula(String aula){
 
@@ -52,7 +80,7 @@ public class CursadasBD {
                         rs.getInt("materia_id"),
                         rs.getString("nro_aula"),
                         rs.getInt("cupo"),
-                        rs.getInt("comision")
+                        rs.getInt("profesor_id")
                 );
             }
         } catch (SQLException ex) {
@@ -79,7 +107,7 @@ public class CursadasBD {
                         rs.getInt("materia_id"),
                         rs.getString("nro_aula"),
                         rs.getInt("cupo"),
-                        rs.getInt("comision")
+                        rs.getInt("profesor_id")
                 );
             }
         } catch (SQLException ex) {
@@ -117,6 +145,31 @@ public class CursadasBD {
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
+    }
+
+    public void createCursadas(){
+
+        List<Cursadas> cursadas=new ArrayList<Cursadas>();
+        //MATEMATICA I - PROFESOR: DIEGO
+        cursadas.add(new Cursadas(0,"Lunes 12 a 16 hs",0, "A23",30,0));
+        cursadas.add(new Cursadas(0,"Lunes 18 a 22 hs",0, "A23",30,0));
+        //MATEMATICA II - PROFESOR: CARLOS
+        cursadas.add(new Cursadas(0,"Martes 12 a 16 hs",1, "A23",30,1));
+        cursadas.add(new Cursadas(0,"Martes 18 a 22 hs",1, "A23",30,1));
+        //OBJETOS I - PROFESOR: JOSE
+        cursadas.add(new Cursadas(0,"Miercoles 12 a 15 hs - viernes 12 - 15 hs.",2, "A27",30,2));
+        cursadas.add(new Cursadas(0,"Miercoles 18 a 22 hs - viernes 18 - 21 hs.",2, "A27",30,2));
+        //OBJETOS II - PROFESOR: MANUEL
+        cursadas.add(new Cursadas(0,"Martes 12 a 15 hs - jueves 12 - 15 hs.",3, "A21",30,3));
+        cursadas.add(new Cursadas(0,"Martes 18 a 21 hs - jueves 18 a 21 hs.",3, "A21",30,3));
+        //OBJETOS III - PROFESOR: PEDRO
+        cursadas.add(new Cursadas(0,"Lunes 12 a 15 hs - jueves 12 - 15 hs.",4, "B21",30,4));
+        cursadas.add(new Cursadas(0,"Lunes 18 a 21 hs - jueves 18 a 21 hs.",4, "B21",30,4));
+
+
+        for (Cursadas cursada:cursadas) {
+            this.insertar(cursada);
+        }
     }
 
 }

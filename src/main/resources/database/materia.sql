@@ -5,6 +5,6 @@ CREATE TABLE `materia`(
   `nombre` varchar(50) DEFAULT NULL,
   `carga_horaria` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
 
 
