@@ -1,9 +1,10 @@
 use instricpcion;
 
-CREATE TABLE `profesor` (
+CREATE TABLE `profesor`(
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   `apellido` varchar(45) NOT NULL,
+  `legajo` int(11) NOT NULL,
   `mail` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)

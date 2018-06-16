@@ -12,13 +12,17 @@ public class ProfesorBD {
 
     public void insertar(Profesor profesor) {
         try{
-            PreparedStatement pstat = cn.prepareStatement("INSERT INTO profesor (id, nombre, apellido, mail, password) VALUES (?,?,?,?,?)");
+
+            PreparedStatement pstat = cn.prepareStatement("INSERT INTO profesor (id, nombre, apellido,legajo, mail, password) VALUES (?,?,?,?,?,?)");
+
 
             pstat.setString(1, null);
             pstat.setString(2, profesor.getNombre());
             pstat.setString(3, profesor.getApellido());
-            pstat.setString(4, profesor.getMail());
-            pstat.setString(5, profesor.getPassword());
+            pstat.setInt(4, profesor.getLegajo());
+            pstat.setString(5, profesor.getMail());
+            pstat.setString(6, profesor.getPassword());
+
 
             //Se ejecuta el query de envío de datos
             pstat.execute();
@@ -27,6 +31,32 @@ public class ProfesorBD {
             System.out.println(ex.getMessage());
         }
     }
+
+    public Profesor buscarPorLegajo(int legajo){
+        Profesor profesor=null;
+        try {
+            PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  profesor WHERE legajo=?");
+
+            pstat.setInt(1, legajo);
+            ResultSet rs = pstat.executeQuery();
+
+            while (rs.next()) {
+                profesor = new Profesor(
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("apellido"),
+                        rs.getInt("legajo"),
+                        rs.getString("mail"),
+                        rs.getString("password"));
+
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return profesor;
+    }
+
 
     public Profesor buscarPorMail(String mail){
         Profesor profesor=null;
@@ -41,6 +71,7 @@ public class ProfesorBD {
                         rs.getInt("id"),
                         rs.getString("nombre"),
                         rs.getString("apellido"),
+                        rs.getInt("legajo"),
                         rs.getString("mail"),
                         rs.getString("password"));
 
