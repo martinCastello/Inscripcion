@@ -2,11 +2,21 @@ package test;
 
 import BD.*;
 import Entidades.*;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.sql.Connection;
 
 import static org.junit.Assert.*;
 
 public class InscripcionTDD {
+
+    @Before
+    public void setUp(){
+        ConectorBD conectorBD = new ConectorBD();
+        conectorBD.createAll();
+
+    }
 
     @Test
     public void consultaProfesor(){
