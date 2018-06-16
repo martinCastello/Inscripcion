@@ -3,7 +3,6 @@ use instricpcion;
 CREATE TABLE `inscripciones` (
 
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  upstream/master
   `usuario_id` int(11) NOT NULL,
   `cursadas_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
