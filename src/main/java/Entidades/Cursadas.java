@@ -77,4 +77,6 @@ public class Cursadas {
                 ", profesor_id=" + profesor_id +
                 '}';
     }
+
+
 }

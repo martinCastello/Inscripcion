@@ -1,4 +1,4 @@
-use instricpcion;
+use inscripcion;
 
 CREATE TABLE `cursadas` (
 

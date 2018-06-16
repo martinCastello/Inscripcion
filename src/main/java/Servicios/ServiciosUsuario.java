@@ -17,7 +17,7 @@ public class ServiciosUsuario {
             System.out.println("Success access");
         }
         else{
-            this.user= profesorBD.buscarPorLegajo(legajo);
+    //        this.user= profesorBD.buscarPorLegajo(legajo);
             this.validation = this.user.validateUser(legajo, this.user.getPassword());
             System.out.println("Success access");
         }

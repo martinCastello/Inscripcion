@@ -31,6 +31,28 @@ public class MateriaBD {
         }
     }
 
+    public List<Materia> listar(){
+        List<Materia> materias=new ArrayList<Materia>();
+        try {
+            PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  materia");
+
+            ResultSet rs = pstat.executeQuery();
+            while (rs.next()) {
+                materias.add(new Materia(
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getInt("carga_horaria")
+                        )
+                );
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return materias;
+    }
+
+
     public Materia buscarPorNombre(String nombre){
         Materia materia=null;
         try {

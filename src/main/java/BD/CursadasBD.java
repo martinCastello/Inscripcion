@@ -90,6 +90,61 @@ public class CursadasBD {
         return cursada;
     }
 
+    public Cursadas buscarPorID(int id){
+
+        Cursadas cursada=null;
+        try {
+            PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  cursadas WHERE id=?");
+
+            pstat.setInt(1, id);
+            ResultSet rs = pstat.executeQuery();
+
+
+            while (rs.next()) {
+                cursada = new Cursadas(
+                        rs.getInt("id"),
+                        rs.getString("dias_y_horarios"),
+                        rs.getInt("materia_id"),
+                        rs.getString("nro_aula"),
+                        rs.getInt("cupo"),
+                        rs.getInt("profesor_id")
+                );
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return cursada;
+    }
+
+    public List<Cursadas> buscarPorProfesor(int id){
+
+        List<Cursadas> cursadas=new ArrayList<Cursadas>();
+        try {
+            PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  cursadas WHERE profesor_id=?");
+
+            pstat.setInt(1, id);
+            ResultSet rs = pstat.executeQuery();
+
+
+            while (rs.next()) {
+                cursadas.add( new Cursadas(
+                        rs.getInt("id"),
+                        rs.getString("dias_y_horarios"),
+                        rs.getInt("materia_id"),
+                        rs.getString("nro_aula"),
+                        rs.getInt("cupo"),
+                        rs.getInt("profesor_id")
+                        )
+                );
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return cursadas;
+    }
+
 
     public Cursadas buscarPorIdMateria(int id) {
         Cursadas cursada=null;
@@ -151,20 +206,20 @@ public class CursadasBD {
 
         List<Cursadas> cursadas=new ArrayList<Cursadas>();
         //MATEMATICA I - PROFESOR: DIEGO
-        cursadas.add(new Cursadas(0,"Lunes 12 a 16 hs",0, "A23",30,0));
-        cursadas.add(new Cursadas(0,"Lunes 18 a 22 hs",0, "A23",30,0));
+        cursadas.add(new Cursadas(0,"Lunes 12 a 16 hs",1, "A23",30,1));
+        cursadas.add(new Cursadas(0,"Lunes 18 a 22 hs",1, "A23",30,1));
         //MATEMATICA II - PROFESOR: CARLOS
-        cursadas.add(new Cursadas(0,"Martes 12 a 16 hs",1, "A23",30,1));
-        cursadas.add(new Cursadas(0,"Martes 18 a 22 hs",1, "A23",30,1));
+        cursadas.add(new Cursadas(0,"Martes 12 a 16 hs",2, "A23",30,2));
+        cursadas.add(new Cursadas(0,"Martes 18 a 22 hs",2, "A23",30,2));
         //OBJETOS I - PROFESOR: JOSE
-        cursadas.add(new Cursadas(0,"Miercoles 12 a 15 hs - viernes 12 - 15 hs.",2, "A27",30,2));
-        cursadas.add(new Cursadas(0,"Miercoles 18 a 22 hs - viernes 18 - 21 hs.",2, "A27",30,2));
+        cursadas.add(new Cursadas(0,"Miercoles 12 a 15 hs y viernes 12 a 15 hs.",3, "A27",30,3));
+        cursadas.add(new Cursadas(0,"Miercoles 18 a 22 hs y viernes 18 a 21 hs.",3, "A27",30,3));
         //OBJETOS II - PROFESOR: MANUEL
-        cursadas.add(new Cursadas(0,"Martes 12 a 15 hs - jueves 12 - 15 hs.",3, "A21",30,3));
-        cursadas.add(new Cursadas(0,"Martes 18 a 21 hs - jueves 18 a 21 hs.",3, "A21",30,3));
+        cursadas.add(new Cursadas(0,"Martes 12 a 15 hs y jueves 12 a 15 hs.",4, "A21",30,4));
+        cursadas.add(new Cursadas(0,"Martes 18 a 21 hs y jueves 18 a 21 hs.",4, "A21",30,4));
         //OBJETOS III - PROFESOR: PEDRO
-        cursadas.add(new Cursadas(0,"Lunes 12 a 15 hs - jueves 12 - 15 hs.",4, "B21",30,4));
-        cursadas.add(new Cursadas(0,"Lunes 18 a 21 hs - jueves 18 a 21 hs.",4, "B21",30,4));
+        cursadas.add(new Cursadas(0,"Lunes 12 a 15 hs y jueves 12 a 15 hs.",5, "B21",30,5));
+        cursadas.add(new Cursadas(0,"Lunes 18 a 21 hs y jueves 18 a 21 hs.",5, "B21",30,5));
 
 
         for (Cursadas cursada:cursadas) {

@@ -54,7 +54,7 @@ public class ConectorBD {
     public void createBD(){
         Connection cn = this.Conectar();
         try{
-            PreparedStatement pstat = cn.prepareStatement("CREATE DATABASE instricpcion;");
+            PreparedStatement pstat = cn.prepareStatement("CREATE DATABASE inscripcion;");
             pstat.execute();
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
@@ -68,7 +68,7 @@ public class ConectorBD {
             Class.forName(driverName); // here is the ClassNotFoundException
 
             String serverName = "127.0.0.1";
-            String mydatabase = "instricpcion";
+            String mydatabase = "inscripcion";
             String url = "jdbc:mysql://" + serverName + "/" + mydatabase;
 
             String username = "root";
@@ -105,7 +105,7 @@ public class ConectorBD {
                     "  `mail` VARCHAR(45) NOT NULL,\n" +
                     "  `password` VARCHAR(45) NOT NULL,\n" +
                     "  PRIMARY KEY (`id`)\n" +
-                    ") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;");
+                    ") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;");
             pstat1.execute();
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
@@ -124,11 +124,11 @@ public class ConectorBD {
                     "  `materia_id` int(11) NOT NULL,\n" +
                     "  `nro_aula` varchar(45) NOT NULL,\n" +
                     "  `cupo` int(11) NOT NULL,\n" +
-                    "  `comision` int(11) NOT NULL,\n" +
+                    "  `profesor_id` int(11),\n" +
                     "\n" +
                     "  PRIMARY KEY (`id`),\n" +
                     "  KEY `fk_cursadas_materia1_idx` (`materia_id`)\n" +
-                    ") ENGINE=InnoDB DEFAULT CHARSET=latin1;");
+                    ") ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;");
             pstat1.execute();
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
@@ -148,7 +148,7 @@ public class ConectorBD {
                     "  PRIMARY KEY (`id`),\n" +
                     "  KEY `fk_inscripciones_usuario1_idx` (`usuario_id`),\n" +
                     "  KEY `fk_inscripciones_cursadas1_idx` (`cursadas_id`)\n" +
-                    ") ENGINE=InnoDB DEFAULT CHARSET=latin1;");
+                    ") ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;");
             pstat1.execute();
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
@@ -166,7 +166,7 @@ public class ConectorBD {
                     "  `nombre` varchar(50) DEFAULT NULL,\n" +
                     "  `carga_horaria` int(11) DEFAULT NULL,\n" +
                     "  PRIMARY KEY (`id`)\n" +
-                    ") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;");
+                    ") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0  ;");
             pstat1.execute();
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
@@ -187,7 +187,7 @@ public class ConectorBD {
                     "  `mail` VARCHAR(45) NOT NULL,\n" +
                     "  `password` VARCHAR(45) NOT NULL,\n" +
                     "  PRIMARY KEY (`id`)\n" +
-                    ") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;");
+                    ") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0  ;");
             pstat1.execute();
         }catch(SQLException ex){
             System.out.println(ex.getMessage());

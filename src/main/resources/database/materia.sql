@@ -1,4 +1,4 @@
-use instricpcion;
+use inscripcion;
 
 CREATE TABLE `materia`(
   `id` int(11) NOT NULL AUTO_INCREMENT,
