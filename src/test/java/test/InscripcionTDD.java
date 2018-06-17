@@ -4,9 +4,6 @@ import BD.*;
 import Entidades.*;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.sql.Connection;
-
 import static org.junit.Assert.*;
 
 public class InscripcionTDD {
@@ -34,7 +31,6 @@ public class InscripcionTDD {
         Alumno alumno = alumnoBD.buscarPorMail("omar.gomez@gmail.com");
 
         assertEquals("1111", alumno.getPassword());
-
     }
 
     @Test
@@ -78,12 +74,9 @@ public class InscripcionTDD {
 
         InscripcionesBD inscripcionesBD= new InscripcionesBD();
         inscripcionesBD.insertar(inscripciones);
-       Inscripciones i=  inscripcionesBD.buscar(aluBD.getId());
-
-
+        Inscripciones i=  inscripcionesBD.buscar(aluBD.getId());
 
         assertEquals (cursada_matBD.getId(), i.getCursada_id());
-
     }
         
 }

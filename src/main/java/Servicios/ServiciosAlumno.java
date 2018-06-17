@@ -1,6 +1,4 @@
 package Servicios;
-
-
 import BD.*;
 import Entidades.*;
 
@@ -18,4 +16,5 @@ public class ServiciosAlumno extends ServiciosUsuario {
         }
 
     }
+
 }

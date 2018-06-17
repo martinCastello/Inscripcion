@@ -1,7 +1,11 @@
 package BD;
 
 import Entidades.Alumno;
+import Entidades.Profesor;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AlumnoBD {
     ConectorBD cc = new ConectorBD();
@@ -78,4 +82,17 @@ public class AlumnoBD {
 
         return alumno;
     }
+
+    public void createAlumnos(){
+
+        List<Alumno> alumnos=new ArrayList<Alumno>();
+
+        alumnos.add(new Alumno(0,"Omar","Gomez", 001,1,"ogomez@unq.com","ogomez"));
+
+
+        for (Alumno alumno:alumnos) {
+            this.insertar(alumno);
+        }
+    }
+
 }

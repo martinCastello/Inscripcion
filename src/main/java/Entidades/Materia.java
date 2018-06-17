@@ -44,5 +44,9 @@ public class Materia {
                 ", carga_horaria=" + carga_horaria +
                 '}';
     }
+
+    public String info(){
+        return this.getNombre()+", carga horaria semanal "+this.getCarga_horaria();
+    }
 }
 
