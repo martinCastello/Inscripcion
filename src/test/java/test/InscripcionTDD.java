@@ -2,11 +2,18 @@ package test;
 
 import BD.*;
 import Entidades.*;
+import org.junit.Before;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 public class InscripcionTDD {
+
+    @Before
+    public void setUp(){
+        ConectorBD conectorBD = new ConectorBD();
+        conectorBD.createAll();
+
+    }
 
     @Test
     public void consultaProfesor(){
@@ -24,7 +31,6 @@ public class InscripcionTDD {
         Alumno alumno = alumnoBD.buscarPorMail("omar.gomez@gmail.com");
 
         assertEquals("1111", alumno.getPassword());
-
     }
 
     @Test
@@ -46,7 +52,7 @@ public class InscripcionTDD {
         Cursadas cursada_mat2 = cursadasBD.buscarPorAula("37B");
 
         assertEquals("lunes de 12 a 15", cursada_mat2.getDias_y_horarios());
-        
+
     }
     @Test
     public  void consultarInscripcion(){
@@ -68,15 +74,9 @@ public class InscripcionTDD {
 
         InscripcionesBD inscripcionesBD= new InscripcionesBD();
         inscripcionesBD.insertar(inscripciones);
-       Inscripciones i=  inscripcionesBD.buscar(aluBD.getId());
-
-
+        Inscripciones i=  inscripcionesBD.buscar(aluBD.getId());
 
         assertEquals (cursada_matBD.getId(), i.getCursada_id());
-
     }
-        
+
 }
-
-
-

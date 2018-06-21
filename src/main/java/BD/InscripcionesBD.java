@@ -12,6 +12,7 @@ public class InscripcionesBD {
 
     public void insertar(Inscripciones inscripciones) {
         try{
+
             PreparedStatement pstat = cn.prepareStatement("INSERT INTO inscripciones(id, usuario_id, cursadas_id) VALUES (?,?,?)");
 
             pstat.setString(1, null);
@@ -47,4 +48,5 @@ public class InscripcionesBD {
 
         return inscripciones;
     }
+
 }

@@ -24,9 +24,9 @@ services:
 #  - npm install
 
 before_script:
-  - mysql -e 'DROP DATABASE IF EXISTS instricpcion;' #@MartinCastello
-  - mysql -e 'CREATE DATABASE instricpcion;'
-  - mysql -e 'use instricpcion;'
+  - mysql -e 'DROP DATABASE IF EXISTS inscripcion;' #@MartinCastello
+  - mysql -e 'CREATE DATABASE inscripcion;'
+  - mysql -e 'use inscripcion;'
 #  - mysql -e "USE mysql;
 #  - mysql -e 'USE mysql;' #Se comenta porque para crear la tabla usuario necesita database instripcion
 #      DROP TABLE IF EXISTS usuario;
@@ -41,11 +41,11 @@ before_script:
 
 #  - mysql -e 'CREATE TABLE usuario (id int(11) NOT NULL AUTO_INCREMENT, apellido varchar(50) DEFAULT NULL, legajo varchar(50) DEFAULT NULL, PRIMARY KEY (id), ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3;'
 #Se comento lo de arriba por error en travis, entonces llamo a archivo usuario.sql
-  - mysql -u root instricpcion < src/main/resources/database/alumno.sql
-  - mysql -u root instricpcion < src/main/resources/database/cursadas.sql
-  - mysql -u root instricpcion < src/main/resources/database/inscripciones.sql
-  - mysql -u root instricpcion < src/main/resources/database/materia.sql
-  - mysql -u root instricpcion < src/main/resources/database/profesor.sql
+  - mysql -u root inscripcion < src/main/resources/database/alumno.sql
+  - mysql -u root inscripcion < src/main/resources/database/cursadas.sql
+  - mysql -u root inscripcion < src/main/resources/database/inscripciones.sql
+  - mysql -u root inscripcion < src/main/resources/database/materia.sql
+  - mysql -u root inscripcion < src/main/resources/database/profesor.sql
 
 #  - mysql -utravis < src/main/resources/database/schema_creation.sql
 #  - mysql -utravis < src/main/resources/database/user.sql

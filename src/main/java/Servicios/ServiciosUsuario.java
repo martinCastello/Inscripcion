@@ -1,5 +1,4 @@
 package Servicios;
-
 import Entidades.*;
 import BD.*;
 
@@ -18,7 +17,7 @@ public class ServiciosUsuario {
             System.out.println("Success access");
         }
         else{
-            this.user= profesorBD.buscarPorLegajo(legajo);
+    //        this.user= profesorBD.buscarPorLegajo(legajo);
             this.validation = this.user.validateUser(legajo, this.user.getPassword());
             System.out.println("Success access");
         }
@@ -50,4 +49,5 @@ public class ServiciosUsuario {
     public  boolean validation(){
         return this.validation;
     }
+
 }
