@@ -19,15 +19,6 @@ public class InscripcionTDD {
     }
 
     @Test
-    public void consultaProfesor(){
-        ProfesorBD profesorBD=new ProfesorBD();
-        profesorBD.insertar(new Profesor(0, "Diego", "Perez",121,"diego@gmail.com", "1111"));
-        Profesor profesor=profesorBD.buscarPorMail("diego@gmail.com");
-
-        assertEquals("Diego", profesor.getNombre());
-    }
-
-    @Test
     public void consultaAlumno(){
         AlumnoBD alumnoBD =new AlumnoBD();
         alumnoBD.insertar(new Alumno(0, "Omar", "Gomez",123,1, "omar.gomez@gmail.com","1111"));
