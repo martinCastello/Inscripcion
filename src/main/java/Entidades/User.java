@@ -66,7 +66,7 @@ public class User {
     }
 
     public  boolean validateUser(int legajo, String password){
-        return  (this.getLegajo() == legajo&& this.getPassword()== password);
+        return  (this.getPassword().equals(password));
     }
 
     public void updatePersonalData(String field, String value){
