@@ -9,4 +9,3 @@ CREATE TABLE `inscripciones` (
   KEY `fk_inscripciones_usuario1_idx` (`usuario_id`),
   KEY `fk_inscripciones_cursadas1_idx` (`cursadas_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=0;
-
