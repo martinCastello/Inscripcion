@@ -2,13 +2,13 @@ package Servicios;
 import Entidades.*;
 import BD.*;
 
-public class ServiciosUsuario {
+public abstract class ServiciosUsuario {
     private boolean validation= false;
     private AlumnoBD alumnoBD= new AlumnoBD();
     private ProfesorBD profesorBD= new ProfesorBD();
     private  User user;
     private MateriaBD materiaBD= new MateriaBD();
-    private CursadasBD cursadasBD= new CursadasBD();
+
 
     public boolean logIn(int legajo, String pass,String type)
     {
