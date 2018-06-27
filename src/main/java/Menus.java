@@ -1,5 +1,6 @@
 import BD.*;
 import Entidades.*;
+import Servicios.ServiciosAlumno;
 
 import java.util.Scanner;
 
@@ -51,7 +52,8 @@ public class Menus {
         System.out.println (
                 "Menu profesores: \n" +
                         "1- Ver cursadas asignadas. \n" +
-                        "2- Menu principal.");
+                        "2- Ver alumnos por curso. \n" +
+                        "3- Menu principal.");
 
         //Invocamos un método sobre un objeto Scanner
         String entradaTeclado = entradaEscaner.nextLine ();
@@ -62,6 +64,10 @@ public class Menus {
                 this.menuListarCursadas(profesorBD.buscarPorMail("dperez@unq.com"));
                 break;
             case "2":
+                this.clearScreen();
+                this.menuListarAlumnos(profesorBD.buscarPorMail("dperez@unq.com"));
+                break;
+            case "3":
                 this.clearScreen();
                 this.menuPrincipal();
                 break;
@@ -77,12 +83,45 @@ public class Menus {
         CursadasBD cursadasBD=new CursadasBD();
         MateriaBD materiaBD=new MateriaBD();
 
-        System.out.println ("Cusadas de "+profesor.getNombre()+" "+profesor.getApellido()+":  \n ");
+        System.out.println ("Cursadas de "+profesor.getNombre()+" "+profesor.getApellido()+":  \n ");
 
         for (Cursadas cursada: cursadasBD.buscarPorProfesor(profesor.getId())) {
             System.out.println(cursada.getId() + " - "
                     + materiaBD.buscarPorID(cursada.getMateria_id()).info() + ", "
                     + cursada.getDias_y_horarios() + ". ");
+        }
+
+        System.out.println ("Presione intro para volver.  \n ");
+
+        //Invocamos un método sobre un objeto Scanner
+        String entradaTeclado = entradaEscaner.nextLine ();
+
+        this.clearScreen();
+        this.menuPrincipalProfesores();
+
+
+
+    }
+
+    private void menuListarAlumnos(Profesor profesor) {
+        CursadasBD cursadasBD=new CursadasBD();
+        MateriaBD materiaBD=new MateriaBD();
+        InscripcionesBD inscripcionesBD = new InscripcionesBD();
+        AlumnoBD alumnoBD = new AlumnoBD();
+
+        System.out.println ("Cursos del profesor "+profesor.getNombre()+" "+profesor.getApellido()+":  \n ");
+
+        for (Cursadas cursada: cursadasBD.buscarPorProfesor(profesor.getId())) {
+            System.out.println(cursada.getId() + " - "
+                    + materiaBD.buscarPorID(cursada.getMateria_id()).info() + ", "
+                    + cursada.getDias_y_horarios() + ". ");
+            System.out.println("    Alumnos: ");
+            for(int alumno_id: inscripcionesBD.buscarIDAlumnos(cursada.getId())) {
+                Alumno alumno = alumnoBD.buscarPorId(alumno_id);
+                System.out.println("             " + alumno.getNombre() + " "
+                        + alumno.getApellido() + ", "
+                        + "Legajo: " + alumno.getLegajo() + ". " + "\n");
+            }
         }
 
         System.out.println ("Presione intro para volver.  \n ");
@@ -119,19 +158,22 @@ public class Menus {
         Integer entrada=Integer.parseInt(entradaTeclado);
 
         if(entrada.intValue()>0&&entrada.intValue()<=cursadasBD.listar().size()){
-            InscripcionesBD inscripcionesBD=new InscripcionesBD();
-            inscripcionesBD.insertar(new Inscripciones(0,alumno.getId(),entrada.intValue()));
+            //InscripcionesBD inscripcionesBD=new InscripcionesBD();
+            //inscripcionesBD.insertar(new Inscripciones(0,alumno.getId(),entrada.intValue()));
             Cursadas cursada=cursadasBD.buscarPorID(entrada.intValue());
+            Materia materia = materiaBD.buscarPorID(cursada.getMateria_id());
+            ServiciosAlumno serviceAlumno = new ServiciosAlumno();
+            serviceAlumno.inscribirACursada(alumno.getId(), entrada.intValue());
 
             this.clearScreen();
-            System.out.println("Te inscribiste en "+materiaBD.buscarPorID(cursada.getMateria_id()).info() + ", "
+            System.out.println("Te inscribiste en "+materia.info() + ", "
                     + cursada.getDias_y_horarios() +". \n");
             this.menuPrincipal();
         }
         else{
             this.clearScreen();
-            System.out.println("Opción invalida, reintente. \n");
-            this.menuPrincipalInscripcion();
+            System.out.println("Opción invalida, se vuelve al menu principal. \n");
+            this.menuPrincipal();
 
         }
     }

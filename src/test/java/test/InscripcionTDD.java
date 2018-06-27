@@ -116,7 +116,7 @@ public class InscripcionTDD {
         aluServ.logIn(123,"1110","alumno");
 
 
-        aluServ.inscribirACursada(idalu,"OOP1");
+        aluServ.inscribirACursada(idalu,idcursada);
 
         InscripcionesBD insc= new InscripcionesBD();
 
