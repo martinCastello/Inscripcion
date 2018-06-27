@@ -19,10 +19,46 @@ Nro | Nombre        | Legajo | Mail
 
 
 
-###Burndown chart
+##Burndown chart
 
 ![captura de pantalla de 2018-06-26 20-24-32](https://user-images.githubusercontent.com/31372437/41944772-ea893c4e-797f-11e8-9987-ece4cfd8ec4c.png)
 
+
+##Retrospectiva:
+30/05
+* Agrregar colchon a la estimación por desconocimiento de tecnología.
+* Capitalizar el esfuerzo de cada integrante (ascentar el progreso)
+
+06/06
+Low:
+- Ninguna
+
+High:
+- Capitalizamos el esfuerzo de todos.
+- Subsanamos las carencias técnicas.
+- Nos coordinamos mejor.
+
+13/06
+low
+-Falta de tiempo para poder implementar entregable para el usuario
+
+High:
+- Articulación de grupo
+- Refactor de clases
+
+20/06
+Low:
+-No se logro nivelar el ritmo de trabajo
+
+High:
+-Aumento del flujo de trabajo
+
+27/06
+Low:
+-Continuamos con el problema de nivelar el ritmo pero, se mejoro 
+
+High:
+-Logramos compartir conocimientos para nivelar los mismos.
 
 ## Inscripción
 
