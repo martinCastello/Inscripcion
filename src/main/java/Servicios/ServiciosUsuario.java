@@ -21,14 +21,14 @@ public abstract class ServiciosUsuario {
             }
         }
         else
+        {
+            this.user = profesorBD.buscarPorLegajo(legajo);
+            if (this.user != null)
             {
-                this.user = profesorBD.buscarPorLegajo(legajo);
-                if (this.user != null)
-                {
-                    this.validation = this.user.validateUser(legajo, pass);
-                }
+                this.validation = this.user.validateUser(legajo, pass);
             }
-            return this.validation;
+        }
+        return this.validation;
     }
     public void updatePersonalData(String field, String value){
         if (validation){
