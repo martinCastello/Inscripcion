@@ -43,7 +43,7 @@ public class ConectorBD {
     public void clear() {
         Connection cn = this.Conectar();
         try{
-            PreparedStatement pstat = cn.prepareStatement("DROP DATABASE IF EXISTS instricpcion;");
+            PreparedStatement pstat = cn.prepareStatement("DROP DATABASE IF EXISTS inscripcion;");
             pstat.execute();
 
         }catch(SQLException ex){

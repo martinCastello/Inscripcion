@@ -1,10 +1,13 @@
 package BD;
 
 import Entidades.Inscripciones;
+import Entidades.Alumno;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InscripcionesBD {
     ConectorBD cc = new ConectorBD();
@@ -48,5 +51,26 @@ public class InscripcionesBD {
 
         return inscripciones;
     }
+
+
+    public List<Integer> buscarIDAlumnos(int id) {
+        List<Integer> alumnos = new ArrayList<Integer>();
+        try {
+            PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  inscripciones WHERE cursadas_id=? ");
+
+            pstat.setInt(1, id);
+            ResultSet rs = pstat.executeQuery();
+
+            while (rs.next()) {
+                alumnos.add(rs.getInt("usuario_id"));
+
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return alumnos;
+    }
+
 
 }

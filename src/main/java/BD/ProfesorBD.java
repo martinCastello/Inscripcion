@@ -35,38 +35,41 @@ public class ProfesorBD {
         }
     }
 
-//    public Profesor buscarPorLegajo(int legajo){
-//        Profesor profesor=null;
-//        try {
-//            PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  profesor WHERE legajo=?");
-//
-//            pstat.setInt(1, legajo);
-//            ResultSet rs = pstat.executeQuery();
-//
-//            while (rs.next()) {
-//                profesor = new Profesor(
-//                        rs.getInt("id"),
-//                        rs.getString("nombre"),
-//                        rs.getString("apellido"),
-//                        rs.getInt("legajo"),
-//                        rs.getString("mail"),
-//                        rs.getString("password"));
-//
-//            }
-//        } catch (SQLException ex) {
-//            System.out.println(ex.getMessage());
-//        }
-//
-//        return profesor;
-//    }
+
+   public Profesor buscarPorLegajo(int legajo){
+        Profesor profesor=null;
+       try {
+            PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  profesor WHERE legajo=?");
+
+            pstat.setInt(1, legajo);
+
+            ResultSet rs = pstat.executeQuery();
+
+            while (rs.next()) {
+                profesor = new Profesor(
+                        rs.getInt("id"),
+                       rs.getString("nombre"),
+                        rs.getString("apellido"),
+                        rs.getInt("legajo"),
+                        rs.getString("mail"),
+                        rs.getString("password"));
+
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return profesor;
+    }
+
 
 
     public Profesor buscarPorMail(String mail){
         Profesor profesor=null;
         try {
             PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  profesor WHERE mail=?");
-
             pstat.setString(1, mail);
+
             ResultSet rs = pstat.executeQuery();
 
             while (rs.next()) {
@@ -77,6 +80,7 @@ public class ProfesorBD {
                         rs.getInt("legajo"),
                         rs.getString("mail"),
                         rs.getString("password"));
+
 
             }
         } catch (SQLException ex) {

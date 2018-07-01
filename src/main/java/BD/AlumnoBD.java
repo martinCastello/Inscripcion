@@ -31,6 +31,33 @@ public class AlumnoBD {
         }
     }
 
+    public Alumno buscarPorId(int id){
+        Alumno alumno=null;
+        try {
+            PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  alumno WHERE id=?");
+
+            pstat.setInt(1, id);
+            ResultSet rs = pstat.executeQuery();
+
+            while (rs.next()) {
+                alumno = new Alumno(
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("apellido"),
+                        rs.getInt("legajo"),
+                        rs.getInt("regular"),
+                        rs.getString("mail"),
+                        rs.getString("password"));
+
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return alumno;
+    }
+
+
     public Alumno buscarPorLegajo(int legajo){
         Alumno alumno=null;
         try {
