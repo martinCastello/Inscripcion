@@ -55,4 +55,16 @@ public class Historial {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
+
+    @Override
+    public String toString() {
+        return "Historial{" +
+                "id=" + id +
+                ", alumno_id=" + alumno_id +
+                ", cursada_id=" + cursada_id +
+                ", promedio=" + promedio +
+                ", fecha='" + fecha + '\'' +
+                '}';
+    }
 }
+

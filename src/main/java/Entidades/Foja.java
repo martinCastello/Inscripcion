@@ -1,28 +1,36 @@
 package Entidades;
+import BD.HistorialDB;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Foja {
-    private int notasSinPromediar;
-    private float promedio;
-    private List<MateriaCursada> materiasCursadas= new ArrayList<MateriaCursada>();
+  private Alumno alumno;
+  private List<Historial> historial=new ArrayList<>();
 
-
-    public Foja(){
-        this.notasSinPromediar= 0;
-        this.promedio=0;
+    public Foja(Alumno alumno) {
+        this.alumno = alumno;
+        this.generarHistorial();
     }
 
-    public void addSubject(Materia materia, int notaFinal, Date fecha) {
-        this.notasSinPromediar=+ notaFinal;
-        MateriaCursada mat= new MateriaCursada(materia, notaFinal, fecha);
-        this.materiasCursadas.add(mat);
-        this.promedio= notasSinPromediar/ this.materiasCursadas.size();
+    public Alumno getAlumno() {
+        return alumno;
     }
 
-    public float getPromedio() {
-        return promedio;
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
+    }
+
+    public List<Historial> getHistorial() {
+        return historial;
+    }
+
+    public void setHistorial(List<Historial> historial) {
+        this.historial = historial;
+    }
+
+    public void generarHistorial(){
+        HistorialDB historialDB=new HistorialDB();
+        this.historial=historialDB.buscarPorAlumnoId(this.alumno.getId());
     }
 }

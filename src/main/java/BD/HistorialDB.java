@@ -1,8 +1,6 @@
 package BD;
 
-import Entidades.Alumno;
 import Entidades.Historial;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +14,7 @@ public class HistorialDB {
 
     public void insertar(Historial historial) {
         try{
-            PreparedStatement pstat = cn.prepareStatement("INSERT INTO historial(id, alumno_id, cursada_id, legajo, promedio, fecha) VALUES (?,?,?,?,?,?)");
+            PreparedStatement pstat = cn.prepareStatement("INSERT INTO historial(id, alumno_id, cursada_id, promedio, fecha) VALUES (?,?,?,?,?)");
 
             pstat.setString(1, null);
             pstat.setInt(2, historial.getAlumno_id());
@@ -84,6 +82,9 @@ public class HistorialDB {
         List<Historial> historiales=new ArrayList<Historial>();
 
         historiales.add(new Historial(0,1,1, 6,"06/2018"));
+        historiales.add(new Historial(0,1,3, 6,"06/2018"));
+        historiales.add(new Historial(0,1,5, 6,"12/2017"));
+        historiales.add(new Historial(0,1,7, 6,"12/2017"));
 
         for (Historial historial:historiales) {
             this.insertar(historial);
