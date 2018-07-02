@@ -131,12 +131,12 @@ public class InscripcionTDD {
         profesorBD.insertar(prof);
         int idprof= profesorBD.buscarPorLegajo(121).getId();
 
-        Materia materia= new Materia(0, "OOP1", 23);
+        Materia materia= new Materia(0, "OBJ1", 6);
         MateriaBD materiaBD= new MateriaBD();
         materiaBD.insertar(materia);
-        int idmat= materiaBD.buscarPorNombre("OOP1").getId();
+        int idmat= materiaBD.buscarPorNombre("OBJ1").getId();
 
-        Cursadas cursada= new Cursadas(0,"martes de 12 a 15", idmat,"32", 40,idprof);
+        Cursadas cursada= new Cursadas(0,"Miercoles de 12 a 15", idmat,"32B", 30,idprof);
         CursadasBD cdb= new CursadasBD();
         cdb.insertar(cursada);
         int idcursada= cdb.buscarPorIdMateria(idmat).getId();
@@ -146,14 +146,13 @@ public class InscripcionTDD {
         alumnoBD.insertar(alumno);
         int idalu= alumnoBD.buscarPorLegajo(123).getId();
 
-        /*HistorialDB historialDB=new HistorialDB();
+        HistorialDB historialDB=new HistorialDB();
         historialDB.insertar(new Historial(0,idalu,idcursada,7,"06/2018"));
 
         alumno.setId(idalu);
         Foja foja=new Foja(alumno);
 
-        assertEquals(1, foja.getHistorial().size());*/
-        assertEquals(1, 1);
+        assertEquals(1, foja.getHistorial().size());
 
     }
 }
