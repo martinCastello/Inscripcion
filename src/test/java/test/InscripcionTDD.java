@@ -136,7 +136,7 @@ public class InscripcionTDD {
         materiaBD.insertar(materia);
         int idmat= materiaBD.buscarPorNombre("OBJ1").getId();
 
-        Cursadas cursada= new Cursadas(0,"Miercoles de 12 a 15", idmat,"32B", 30,idprof);
+        Cursadas cursada= new Cursadas(0,"Miercoles de 12 a 15", 1,"32B", 30,1);
         CursadasBD cdb= new CursadasBD();
         cdb.insertar(cursada);
         int idcursada= cdb.buscarPorIdMateria(idmat).getId();
