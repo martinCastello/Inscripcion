@@ -107,14 +107,12 @@ public class InscripcionTDD {
         cdb.insertar(cursada);
         int idcursada= cdb.buscarPorIdMateria(idmat).getId();
 
-
         AlumnoBD alumnoBD= new AlumnoBD();
         Alumno alumno= new Alumno(0, "Omar", "Gomez",123,1, "omar.gomez@gmail.com","1110");
         alumnoBD.insertar(alumno);
         int idalu= alumnoBD.buscarPorLegajo(123).getId();
 
         aluServ.logIn(123,"1110","alumno");
-
 
         aluServ.inscribirACursada(idalu,idcursada);
 
@@ -142,7 +140,6 @@ public class InscripcionTDD {
         CursadasBD cdb= new CursadasBD();
         cdb.insertar(cursada);
         int idcursada= cdb.buscarPorIdMateria(idmat).getId();
-
 
         AlumnoBD alumnoBD= new AlumnoBD();
         Alumno alumno= new Alumno(0, "Omar", "Gomez",123,1, "omar.gomez@gmail.com","1110");
