@@ -89,7 +89,9 @@ public class ConectorBD {
         this.createTableCursadas();
         this.createTableInscripcion();
         this.createTableMateria();
+        this.createTableHistorial();
     }
+
 
     public void createTableAlumno(){
         Connection cn = this.ConectarBD();
@@ -186,6 +188,26 @@ public class ConectorBD {
                     "  `legajo` INT(11) NOT NULL,\n" +
                     "  `mail` VARCHAR(45) NOT NULL,\n" +
                     "  `password` VARCHAR(45) NOT NULL,\n" +
+                    "  PRIMARY KEY (`id`)\n" +
+                    ") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0  ;");
+            pstat1.execute();
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+
+    }
+
+    private void createTableHistorial() {
+        Connection cn = this.ConectarBD();
+        try{
+            PreparedStatement pstat = cn.prepareStatement("DROP TABLE IF EXISTS historial;");
+            pstat.execute();
+            PreparedStatement pstat1 = cn.prepareStatement("CREATE TABLE `historial`(\n" +
+                    "  `id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
+                    "  `alumno_id` int(11) NOT NULL,\n" +
+                    "  `cursada_id` int(11) NOT NULL,\n" +
+                    "  `promedio` int(11) NOT NULL,\n" +
+                    "  `fecha` varchar(45) NOT NULL,\n" +
                     "  PRIMARY KEY (`id`)\n" +
                     ") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0  ;");
             pstat1.execute();

@@ -19,6 +19,9 @@ public class Main {
         AlumnoBD alumnoBD=new AlumnoBD();
         alumnoBD.createAlumnos();
 
+        HistorialDB historialDB=new HistorialDB();
+        historialDB.createHistorial();
+
         Menus menus = new Menus();
         menus.menuPrincipal();
 

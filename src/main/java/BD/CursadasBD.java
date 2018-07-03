@@ -1,8 +1,6 @@
 package BD;
 
 import Entidades.Cursadas;
-import Entidades.Materia;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
