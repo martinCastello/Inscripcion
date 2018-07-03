@@ -52,6 +52,7 @@ public class InscripcionesBD {
         return inscripciones;
     }
 
+
     public List<Integer> buscarIDAlumnos(int id) {
         List<Integer> alumnos = new ArrayList<Integer>();
         try {
@@ -70,5 +71,6 @@ public class InscripcionesBD {
 
         return alumnos;
     }
+
 
 }

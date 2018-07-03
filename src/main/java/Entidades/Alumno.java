@@ -7,12 +7,11 @@ public class Alumno extends  User{
     private int regular;
     private Foja foja;
 
-
     public Alumno(int id, String nombre, String apellido, int legajo, int regular, String mail, String password) {
        super (id,nombre,apellido,legajo,mail,password);
        this.regular= regular;
+       this.foja=new Foja(this);
     }
-
 
     public int getRegular() {
         return regular;
@@ -24,10 +23,6 @@ public class Alumno extends  User{
 
     public  Foja getFoja(){
         return this.foja;
-    }
-
-    public void addASubject(Materia materia, int notaFinal, Date fecha){
-        this.foja.addSubject(materia, notaFinal, fecha);
     }
 
     @Override
