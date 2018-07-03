@@ -13,7 +13,7 @@ public class InscripcionTDD {
 
     @Before
     public void setUp(){
-        ConectorBD conectorBD = new ConectorBD();
+        ConectorBD conectorBD = ConectorBD.getInstance();
         conectorBD.createAll();
 
     }

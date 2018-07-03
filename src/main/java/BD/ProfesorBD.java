@@ -10,10 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProfesorBD {
-    ConectorBD cc = new ConectorBD();
-    Connection cn = cc.ConectarBD();
+    ConectorBD cc = ConectorBD.getInstance();
 
     public void insertar(Profesor profesor) {
+        Connection cn = cc.ConectarBD();
+
         try{
 
             PreparedStatement pstat = cn.prepareStatement("INSERT INTO profesor (id, nombre, apellido,legajo, mail, password) VALUES (?,?,?,?,?,?)");
@@ -33,11 +34,15 @@ public class ProfesorBD {
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
         }
+        cc.desconectar();
+
     }
 
 
    public Profesor buscarPorLegajo(int legajo){
-        Profesor profesor=null;
+       Connection cn = cc.ConectarBD();
+
+       Profesor profesor=null;
        try {
             PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  profesor WHERE legajo=?");
 
@@ -58,6 +63,7 @@ public class ProfesorBD {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+       cc.desconectar();
 
         return profesor;
     }
@@ -65,6 +71,8 @@ public class ProfesorBD {
 
 
     public Profesor buscarPorMail(String mail){
+        Connection cn = cc.ConectarBD();
+
         Profesor profesor=null;
         try {
             PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  profesor WHERE mail=?");
@@ -86,11 +94,14 @@ public class ProfesorBD {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        cc.desconectar();
 
         return profesor;
     }
 
     public void createProfesores(){
+        Connection cn = cc.ConectarBD();
+
 
         List<Profesor> profesores=new ArrayList<Profesor>();
 
@@ -104,6 +115,8 @@ public class ProfesorBD {
         for (Profesor profesor:profesores) {
             this.insertar(profesor);
         }
+        cc.desconectar();
+
     }
     
 }

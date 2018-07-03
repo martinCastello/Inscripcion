@@ -106,8 +106,7 @@ public class Menus {
                 break;
             case "2":
                 this.clearScreen();
-                //TODO implementar metodo menuMateriasRecomendadas(alumno)
-                this.menuPrincipalAlumnos();
+                this.menuMateriasRecomendadas(alumno);
                 break;
             case "3":
                 this.clearScreen();
@@ -123,6 +122,28 @@ public class Menus {
                 System.out.println("Opción invalida, reintente. \n");
                 break;
         }
+    }
+
+    private void menuMateriasRecomendadas(Alumno alumno){
+        System.out.println("Materias recomendadas:\n");
+        System.out.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - \n");
+        alumno.getFoja().generarMateriasAprobadas(alumno);
+        MateriaBD materiaBD=new MateriaBD();
+       for(Materia materia:materiaBD.listar()){
+            if(materia.esRecomenada(alumno)){
+                System.out.println(materia.getNombre()+".\n");
+
+            }
+
+        }
+        System.out.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - \n");
+
+        System.out.println ("Presione una tecla para volver\n");
+
+        //Invocamos un método sobre un objeto Scanner
+        String entradaTeclado = entradaEscaner.nextLine ();
+        this.clearScreen();
+        this.menuPrincipalAlumnos();
     }
 
     private void menuMostrarFoja(Alumno alumno) {

@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ConectorBD conectorBD = new ConectorBD();
+        ConectorBD conectorBD = ConectorBD.getInstance();
         conectorBD.createAll();
 
         MateriaBD materiaBD=new MateriaBD();
@@ -21,6 +21,9 @@ public class Main {
 
         HistorialDB historialDB=new HistorialDB();
         historialDB.createHistorial();
+
+        CorrelativasBD correlativasBD=new CorrelativasBD();
+        correlativasBD.createCorrelativas();
 
         Menus menus = new Menus();
         menus.menuPrincipal();
