@@ -130,12 +130,12 @@ public class InscripcionTDD {
         Profesor prof= new Profesor(0, "Diego", "Perez",121,"diego@gmail.com", "1111");
         profesorBD.insertar(prof);
         int idprof= profesorBD.buscarPorLegajo(121).getId();
-        /*
+
         Materia materia= new Materia(0, "OBJ1", 6);
         MateriaBD materiaBD= new MateriaBD();
         materiaBD.insertar(materia);
         int idmat= materiaBD.buscarPorNombre("OBJ1").getId();
-
+        /*
         Cursadas cursada= new Cursadas(0,"Miercoles de 12 a 15", idmat,"32B", 30,idprof);
         CursadasBD cdb= new CursadasBD();
         cdb.insertar(cursada);
