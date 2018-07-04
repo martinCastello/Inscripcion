@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlumnoBD {
-    ConectorBD cc = new ConectorBD();
-    Connection cn = cc.ConectarBD();
+    ConectorBD cc = ConectorBD.getInstance();
 
     public void insertar(Alumno alumno) {
+        Connection cn = cc.ConectarBD();
         try{
             PreparedStatement pstat = cn.prepareStatement("INSERT INTO alumno(id, nombre, apellido, legajo, regular, mail, password) VALUES (?,?,?,?,?,?,?)");
 
@@ -29,9 +29,13 @@ public class AlumnoBD {
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
         }
+
+        cc.desconectar();
     }
 
     public Alumno buscarPorId(int id){
+        Connection cn = cc.ConectarBD();
+
         Alumno alumno=null;
         try {
             PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  alumno WHERE id=?");
@@ -53,12 +57,15 @@ public class AlumnoBD {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
+        cc.desconectar();
         return alumno;
+
     }
 
 
     public Alumno buscarPorLegajo(int legajo){
+        Connection cn = cc.ConectarBD();
+
         Alumno alumno=null;
         try {
             PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  alumno WHERE legajo=?");
@@ -80,11 +87,13 @@ public class AlumnoBD {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
+        cc.desconectar();
         return alumno;
     }
 
     public Alumno buscarPorMail(String mail){
+        Connection cn = cc.ConectarBD();
+
         Alumno alumno=null;
         try {
             PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  alumno WHERE mail=?");
@@ -106,11 +115,12 @@ public class AlumnoBD {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
+        cc.desconectar();
         return alumno;
     }
 
     public void createAlumnos(){
+        Connection cn = cc.ConectarBD();
 
         List<Alumno> alumnos=new ArrayList<Alumno>();
 
@@ -120,6 +130,8 @@ public class AlumnoBD {
         for (Alumno alumno:alumnos) {
             this.insertar(alumno);
         }
+
+        cc.desconectar();
     }
 
 }

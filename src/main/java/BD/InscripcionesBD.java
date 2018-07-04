@@ -10,10 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InscripcionesBD {
-    ConectorBD cc = new ConectorBD();
-    Connection cn = cc.ConectarBD();
+    ConectorBD cc = ConectorBD.getInstance();
 
     public void insertar(Inscripciones inscripciones) {
+        Connection cn = cc.ConectarBD();
+
         try{
 
             PreparedStatement pstat = cn.prepareStatement("INSERT INTO inscripciones(id, usuario_id, cursadas_id) VALUES (?,?,?)");
@@ -28,9 +29,13 @@ public class InscripcionesBD {
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
         }
+        cc.desconectar();
+
     }
 
     public Inscripciones buscar(int id) {
+        Connection cn = cc.ConectarBD();
+
         Inscripciones inscripciones=null;
         try {
             PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  inscripciones WHERE usuario_id=? ");
@@ -48,12 +53,15 @@ public class InscripcionesBD {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        cc.desconectar();
 
         return inscripciones;
     }
 
 
     public List<Integer> buscarIDAlumnos(int id) {
+        Connection cn = cc.ConectarBD();
+
         List<Integer> alumnos = new ArrayList<Integer>();
         try {
             PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  inscripciones WHERE cursadas_id=? ");
@@ -68,6 +76,7 @@ public class InscripcionesBD {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        cc.desconectar();
 
         return alumnos;
     }

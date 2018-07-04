@@ -11,10 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MateriaBD {
-    ConectorBD cc = new ConectorBD();
-    Connection cn = cc.ConectarBD();
+    ConectorBD cc = ConectorBD.getInstance();
 
     public void insertar(Materia materia) {
+        Connection cn = cc.ConectarBD();
+
         try{
 
             PreparedStatement pstat = cn.prepareStatement("INSERT INTO materia(id, nombre, carga_horaria) VALUES (?,?,?)");
@@ -29,32 +30,45 @@ public class MateriaBD {
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
         }
+
+        cc.desconectar();
+
     }
 
     public List<Materia> listar(){
+        Connection cn = cc.ConectarBD();
+
         List<Materia> materias=new ArrayList<Materia>();
+        CorrelativasBD correlativasBD=new CorrelativasBD();
         try {
             PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  materia");
 
             ResultSet rs = pstat.executeQuery();
             while (rs.next()) {
-                materias.add(new Materia(
+                Materia materia=new Materia(
                         rs.getInt("id"),
                         rs.getString("nombre"),
-                        rs.getInt("carga_horaria")
-                        )
-                );
+                        rs.getInt("carga_horaria"));
+                materia.setCorrelativas(correlativasBD.buscarPorMateriaID(rs.getInt("id")));
+                materias.add(materia);
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+
+        cc.desconectar();
+
 
         return materias;
     }
 
 
     public Materia buscarPorNombre(String nombre){
+        Connection cn = cc.ConectarBD();
+
         Materia materia=null;
+        CorrelativasBD correlativasBD=new CorrelativasBD();
+
         try {
             PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  materia WHERE nombre=?");
 
@@ -64,18 +78,25 @@ public class MateriaBD {
                 materia = new Materia(
                         rs.getInt("id"),
                         rs.getString("nombre"),
-                        rs.getInt("carga_horaria")
-                        );
+                        rs.getInt("carga_horaria"));
+                materia.setCorrelativas(correlativasBD.buscarPorMateriaID(rs.getInt("id")));
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
 
+        cc.desconectar();
+
         return materia;
     }
 
     public Materia buscarPorID(int id){
+        Connection cn = cc.ConectarBD();
+
         Materia materia=null;
+        CorrelativasBD correlativasBD=new CorrelativasBD();
+
+
         try {
             PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  materia WHERE id=?");
 
@@ -85,34 +106,39 @@ public class MateriaBD {
                 materia = new Materia(
                         rs.getInt("id"),
                         rs.getString("nombre"),
-                        rs.getInt("carga_horaria")
-                );
+                        rs.getInt("carga_horaria"));
+                materia.setCorrelativas(correlativasBD.buscarPorMateriaID(rs.getInt("id")));
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        cc.desconectar();
 
         return materia;
     }
 
 
     public void createMaterias(){
+        Connection cn = cc.ConectarBD();
 
         List<Materia> materias=new ArrayList<Materia>();
         materias.add(new Materia(0,"Matematica I",4));
         materias.add(new Materia(0,"Matematica II",4));
         materias.add(new Materia(0,"Objetos I",6));
         materias.add(new Materia(0,"Objetos II",6));
-        materias.add(new Materia(0,"Objetos III",6));
-//        materias.add(new Materia(0,"Base de datos",3));
-//        materias.add(new Materia(0,"Ingles I",2));
-//        materias.add(new Materia(0,"Ingles II",2));
-//        materias.add(new Materia(0,"Sistemas Operativos",3));
-//        materias.add(new Materia(0,"Redes de computadoras",3));
-//        materias.add(new Materia(0,"Elem. de Ing. del Software",6));
+//      materias.add(new Materia(0,"Objetos III",6));
+        materias.add(new Materia(0,"Base de datos",3));
+        materias.add(new Materia(0,"Ingles I",2));
+        materias.add(new Materia(0,"Ingles II",2));
+        materias.add(new Materia(0,"Estruturas de datos",3));
+        materias.add(new Materia(0,"Redes de computadoras",3));
+        materias.add(new Materia(0,"Interfaces de usuario",6));
+
         for (Materia materia:materias) {
             this.insertar(materia);
         }
+
+        cc.desconectar();
     }
 
 

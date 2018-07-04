@@ -11,7 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConectorBD {
-    Connection connection=null;
+    private static  ConectorBD conectorBD;
+    private Connection connection=null;
+
+    private ConectorBD(){
+
+    }
+
+    public static ConectorBD getInstance(){
+        if(conectorBD==null){
+            conectorBD=new ConectorBD();
+        }
+        return conectorBD;
+    }
 
     public void createAll(){
         this.clear();
@@ -20,24 +32,36 @@ public class ConectorBD {
     }
 
     public Connection Conectar() {
-        try {
-            String driverName = "com.mysql.jdbc.Driver";
-            Class.forName(driverName); // here is the ClassNotFoundException
+        if(connection==null){
+            try {
+                String driverName = "com.mysql.jdbc.Driver";
+                Class.forName(driverName); // here is the ClassNotFoundException
 
-            String serverName = "127.0.0.1";
-            //String mydatabase = "instricpcion";
-            String url = "jdbc:mysql://" + serverName; //+ "/" + mydatabase;
+                String serverName = "127.0.0.1";
+                //String mydatabase = "instricpcion";
+                String url = "jdbc:mysql://" + serverName; //+ "/" + mydatabase;
 
-            String username = "root";
-            String password = "";
-            connection = DriverManager.getConnection(url, username, password);
-        }catch (SQLException e){
-            System.out.println(e.getMessage());
-        }catch (Exception e){
-            System.out.println(e.getMessage());
+                String username = "root";
+                String password = "";
+                connection = DriverManager.getConnection(url, username, password);
+            }catch (SQLException e){
+                System.out.println(e.getMessage());
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
         }
 
         return connection;
+    }
+
+    public void desconectar(){
+        try {
+            if(connection!=null){
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void clear() {
@@ -90,6 +114,8 @@ public class ConectorBD {
         this.createTableInscripcion();
         this.createTableMateria();
         this.createTableHistorial();
+        this.createTableCorrelativas();
+
     }
 
 
@@ -208,6 +234,25 @@ public class ConectorBD {
                     "  `cursada_id` int(11) NOT NULL,\n" +
                     "  `promedio` int(11) NOT NULL,\n" +
                     "  `fecha` varchar(45) NOT NULL,\n" +
+                    "  PRIMARY KEY (`id`)\n" +
+                    ") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0  ;");
+            pstat1.execute();
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+
+    }
+
+
+    private void createTableCorrelativas() {
+        Connection cn = this.ConectarBD();
+        try{
+            PreparedStatement pstat = cn.prepareStatement("DROP TABLE IF EXISTS correlativas;");
+            pstat.execute();
+            PreparedStatement pstat1 = cn.prepareStatement("CREATE TABLE `correlativas`(\n" +
+                    "  `id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
+                    "  `materia_id` int(11) NOT NULL,\n" +
+                    "  `materia_correlativa_id` int(11) NOT NULL,\n" +
                     "  PRIMARY KEY (`id`)\n" +
                     ") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0  ;");
             pstat1.execute();
