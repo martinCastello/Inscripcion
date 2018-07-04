@@ -124,7 +124,7 @@ public class InscripcionTDD {
 
     }
 
-/*    @Test
+    @Test
     public void generar_foja(){
         ProfesorBD profesorBD=new ProfesorBD();
         Profesor prof= new Profesor(0, "Diego", "Perez",121,"diego@gmail.com", "1111");
@@ -155,6 +155,6 @@ public class InscripcionTDD {
 
         assertEquals(1, foja.getHistorial().size());
 
-    }*/
+    }
 
 }
