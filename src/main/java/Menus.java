@@ -35,11 +35,11 @@ public class Menus {
                 this.clearScreen();
                 System.out.println("Adios.");
                 break;
-                default:
-                    this.clearScreen();
-                    this.menuPrincipal();
-                    System.out.println("Opción invalida, reintente.");
-                    break;
+            default:
+                this.clearScreen();
+                this.menuPrincipal();
+                System.out.println("Opción invalida, reintente.");
+                break;
         }
 
     }
@@ -75,8 +75,8 @@ public class Menus {
                 break;
             default:
                 this.clearScreen();
-                this.menuPrincipalProfesores();
                 System.out.println("Opción invalida, reintente. \n");
+                this.menuPrincipalProfesores();
                 break;
         }
     }
@@ -114,13 +114,12 @@ public class Menus {
                 break;
             case "4":
                 this.clearScreen();
-                //this.menuPrincipalAlumnos();
                 this.menuPrincipal();
                 break;
             default:
                 this.clearScreen();
-                this.menuPrincipalAlumnos();
                 System.out.println("Opción invalida, reintente. \n");
+                this.menuPrincipalAlumnos();
                 break;
         }
     }
@@ -139,7 +138,7 @@ public class Menus {
         }
         System.out.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - \n");
 
-        System.out.println ("Presione una tecla para volver\n");
+        System.out.println ("Presione intro para volver\n");
 
         //Invocamos un método sobre un objeto Scanner
         String entradaTeclado = entradaEscaner.nextLine ();
@@ -165,7 +164,7 @@ public class Menus {
             System.out.println("Foja vacia. \n");
         }
         System.out.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - \n");
-        System.out.println("Presione una tecla para volver \n");
+        System.out.println("Presione intro para volver \n");
         //Invocamos un método sobre un objeto Scanner
         entradaEscaner.nextLine ();
         this.clearScreen();
@@ -191,21 +190,6 @@ public class Menus {
 
         this.clearScreen();
         this.menuPrincipalProfesores();
-
-        for (Cursadas cursada: cursadasBD.buscarPorProfesor(profesor.getId())) {
-            System.out.println(cursada.getId() + " - "
-                    + materiaBD.buscarPorID(cursada.getMateria_id()).info() + ", "
-                    + cursada.getDias_y_horarios() + ". ");
-        }
-
-        System.out.println ("Presione intro para volver.  \n ");
-
-        //Invocamos un método sobre un objeto Scanner
-        entradaTeclado = entradaEscaner.nextLine ();
-
-        this.clearScreen();
-        this.menuPrincipalProfesores();
-
 
 
     }
@@ -262,26 +246,31 @@ public class Menus {
 
         //Invocamos un método sobre un objeto Scanner
         String entradaTeclado = entradaEscaner.nextLine ();
-        Integer entrada=Integer.parseInt(entradaTeclado);
+        Integer entrada = 0;
+        try{
+            entrada=Integer.parseInt(entradaTeclado);
+            if(entrada.intValue()>0&&entrada.intValue()<=cursadasBD.listar().size()){
+                //InscripcionesBD inscripcionesBD=new InscripcionesBD();
+                //inscripcionesBD.insertar(new Inscripciones(0,alumno.getId(),entrada.intValue()));
+                Cursadas cursada=cursadasBD.buscarPorID(entrada.intValue());
+                Materia materia = materiaBD.buscarPorID(cursada.getMateria_id());
+                ServiciosAlumno serviceAlumno = new ServiciosAlumno();
+                serviceAlumno.inscribirACursada(alumno.getId(), entrada.intValue());
 
-        if(entrada.intValue()>0&&entrada.intValue()<=cursadasBD.listar().size()){
-            //InscripcionesBD inscripcionesBD=new InscripcionesBD();
-            //inscripcionesBD.insertar(new Inscripciones(0,alumno.getId(),entrada.intValue()));
-            Cursadas cursada=cursadasBD.buscarPorID(entrada.intValue());
-            Materia materia = materiaBD.buscarPorID(cursada.getMateria_id());
-            ServiciosAlumno serviceAlumno = new ServiciosAlumno();
-            serviceAlumno.inscribirACursada(alumno.getId(), entrada.intValue());
-
-            this.clearScreen();
-            System.out.println("Te inscribiste en "+materia.info() + ", "
-                    + cursada.getDias_y_horarios() +". \n");
-            this.menuPrincipalAlumnos();
-        }
-        else{
+                this.clearScreen();
+                System.out.println("Te inscribiste en "+materia.info() + ", "
+                        + cursada.getDias_y_horarios() +". \n");
+                this.menuPrincipalAlumnos();
+            }
+            else{
+                this.clearScreen();
+                System.out.println("Opción invalida, se vuelve al menu principal. \n");
+                this.menuPrincipalAlumnos();
+            }
+        }catch(Exception e){
             this.clearScreen();
             System.out.println("Opción invalida, se vuelve al menu principal. \n");
             this.menuPrincipalAlumnos();
-
         }
     }
 
