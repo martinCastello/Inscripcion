@@ -13,7 +13,7 @@ public class InscripcionTDD {
 
     @Before
     public void setUp(){
-        ConectorBD conectorBD = new ConectorBD();
+        ConectorBD conectorBD = ConectorBD.getInstance();
         conectorBD.createAll();
 
     }
@@ -124,7 +124,7 @@ public class InscripcionTDD {
 
     }
 
-    @Test
+/*    @Test
     public void generar_foja(){
         ProfesorBD profesorBD=new ProfesorBD();
         Profesor prof= new Profesor(0, "Diego", "Perez",121,"diego@gmail.com", "1111");
@@ -138,7 +138,7 @@ public class InscripcionTDD {
 
         Cursadas cursada= new Cursadas(0,"Miercoles de 12 a 15", idmat,"32B", 30,idprof);
         CursadasBD cdb= new CursadasBD();
-        /*
+
         cdb.insertar(cursada);
         int idcursada= cdb.buscarPorIdMateria(idmat).getId();
 
@@ -154,7 +154,7 @@ public class InscripcionTDD {
         Foja foja=new Foja(alumno);
 
         assertEquals(1, foja.getHistorial().size());
-        */
-        assertTrue(true);
-    }
+
+    }*/
+
 }

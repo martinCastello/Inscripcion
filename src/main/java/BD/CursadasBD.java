@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CursadasBD {
-    ConectorBD cc = new ConectorBD();
-    Connection cn = cc.ConectarBD();
+    ConectorBD cc = ConectorBD.getInstance();
 
     public void insertar(Cursadas cursadas) {
+        Connection cn = cc.ConectarBD();
+
         try{
 
             PreparedStatement pstat = cn.prepareStatement(
@@ -32,10 +33,14 @@ public class CursadasBD {
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
         }
+
+        cc.desconectar();
+
     }
 
 
     public List<Cursadas> listar(){
+        Connection cn = cc.ConectarBD();
 
         List<Cursadas> cursadas=new ArrayList<Cursadas>();
         try {
@@ -58,10 +63,13 @@ public class CursadasBD {
             System.out.println(ex.getMessage());
         }
 
+        cc.desconectar();
+
         return cursadas;
     }
 
     public Cursadas buscarPorAula(String aula){
+        Connection cn = cc.ConectarBD();
 
         Cursadas cursada=null;
         try {
@@ -85,10 +93,13 @@ public class CursadasBD {
             System.out.println(ex.getMessage());
         }
 
+        cc.desconectar();
+
         return cursada;
     }
 
     public Cursadas buscarPorID(int id){
+        Connection cn = cc.ConectarBD();
 
         Cursadas cursada=null;
         try {
@@ -112,10 +123,13 @@ public class CursadasBD {
             System.out.println(ex.getMessage());
         }
 
+        cc.desconectar();
+
         return cursada;
     }
 
     public List<Cursadas> buscarPorProfesor(int id){
+        Connection cn = cc.ConectarBD();
 
         List<Cursadas> cursadas=new ArrayList<Cursadas>();
         try {
@@ -140,11 +154,15 @@ public class CursadasBD {
             System.out.println(ex.getMessage());
         }
 
+        cc.desconectar();
+
         return cursadas;
     }
 
 
     public Cursadas buscarPorIdMateria(int id) {
+        Connection cn = cc.ConectarBD();
+
         Cursadas cursada=null;
         try {
             PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  cursadas WHERE materia_id=?");
@@ -167,10 +185,14 @@ public class CursadasBD {
             System.out.println(ex.getMessage());
         }
 
+        cc.desconectar();
+
         return cursada;
     }
 
     public void upDateDias_y_horarios(int id, String value) {
+        Connection cn = cc.ConectarBD();
+
             try {
                 PreparedStatement ps = cn.prepareStatement("UPDATE cursadas SET dias_y_horatios = ? WHERE id = ? ");
 
@@ -183,9 +205,14 @@ public class CursadasBD {
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
+
+        cc.desconectar();
+
     }
 
     public void upDateAula(int materia_id, String value) {
+        Connection cn = cc.ConectarBD();
+
             try {
                 PreparedStatement ps = cn.prepareStatement("UPDATE cursadas SET nro_aula = ? WHERE id = ? ");
 
@@ -198,9 +225,13 @@ public class CursadasBD {
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
+
+        cc.desconectar();
+
     }
 
     public void createCursadas(){
+        Connection cn = cc.ConectarBD();
 
         List<Cursadas> cursadas=new ArrayList<Cursadas>();
         //MATEMATICA I - PROFESOR: DIEGO
@@ -223,6 +254,9 @@ public class CursadasBD {
         for (Cursadas cursada:cursadas) {
             this.insertar(cursada);
         }
+
+        cc.desconectar();
+
     }
 
 }
