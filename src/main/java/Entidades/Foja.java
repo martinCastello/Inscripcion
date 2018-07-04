@@ -2,6 +2,7 @@ package Entidades;
 import BD.CursadasBD;
 import BD.HistorialDB;
 import BD.MateriaBD;
+import BD.HistorialDB;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,5 +53,6 @@ public class Foja {
             }
         }
         this.materiasAprobadas=materiasAprobadas;
+
     }
 }

@@ -138,6 +138,7 @@ public class InscripcionTDD {
 
         Cursadas cursada= new Cursadas(0,"Miercoles de 12 a 15", idmat,"32B", 30,idprof);
         CursadasBD cdb= new CursadasBD();
+
         cdb.insertar(cursada);
         int idcursada= cdb.buscarPorIdMateria(idmat).getId();
 
@@ -155,4 +156,5 @@ public class InscripcionTDD {
         assertEquals(1, foja.getHistorial().size());
 
     }*/
+
 }

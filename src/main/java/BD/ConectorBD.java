@@ -115,6 +115,7 @@ public class ConectorBD {
         this.createTableMateria();
         this.createTableHistorial();
         this.createTableCorrelativas();
+
     }
 
 
@@ -260,5 +261,6 @@ public class ConectorBD {
         }
 
     }
+
 
 }

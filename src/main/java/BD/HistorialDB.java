@@ -3,7 +3,7 @@ package BD;
 import Entidades.Alumno;
 import Entidades.Historial;
 import Entidades.Materia;
-
+import Entidades.Historial;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,10 +13,10 @@ import java.util.List;
 
 public class HistorialDB {
     ConectorBD cc = ConectorBD.getInstance();
+        
 
     public void insertar(Historial historial) {
         Connection cn = cc.ConectarBD();
-
         try{
             PreparedStatement pstat = cn.prepareStatement("INSERT INTO historial(id, alumno_id, cursada_id, promedio, fecha) VALUES (?,?,?,?,?)");
 
@@ -38,7 +38,6 @@ public class HistorialDB {
 
     public Historial buscarPorId(int id){
         Connection cn = cc.ConectarBD();
-
         Historial historial=null;
         try {
             PreparedStatement pstat = cn.prepareStatement("SELECT * FROM  historial WHERE id=?");
@@ -148,6 +147,7 @@ public class HistorialDB {
     public void createHistorial(){
         Connection cn = cc.ConectarBD();
 
+
         List<Historial> historiales=new ArrayList<Historial>();
 
         historiales.add(new Historial(0,1,1, 6,"06/2018"));
@@ -162,8 +162,5 @@ public class HistorialDB {
 
         cc.desconectar();
     }
-
-
-
 
 }
