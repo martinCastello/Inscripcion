@@ -3,45 +3,50 @@ import Entidades.*;
 import BD.*;
 
 public abstract class ServiciosUsuario {
-    private boolean validation = false;
-    private AlumnoBD alumnoBD = new AlumnoBD();
-    private ProfesorBD profesorBD = new ProfesorBD();
-    private User user;
-    private MateriaBD materiaBD = new MateriaBD();
+    private boolean validation= false;
+    private AlumnoBD alumnoBD= new AlumnoBD();
+    private ProfesorBD profesorBD= new ProfesorBD();
+    private  User user;
+    private MateriaBD materiaBD= new MateriaBD();
 
 
-    public boolean logIn(int legajo, String pass, String type) {
-        if (type == "alumno") {
+    public boolean logIn(int legajo, String pass,String type)
+    {
+        if (type == "alumno")
+        {
             this.user = alumnoBD.buscarPorLegajo(legajo);
-            if (this.user != null) {
+            if (this.user != null)
+            {
                 this.validation = this.user.validateUser(legajo, pass);
             }
-        } else {
+        }
+        else
+        {
             this.user = profesorBD.buscarPorLegajo(legajo);
-            if (this.user != null) {
+            if (this.user != null)
+            {
                 this.validation = this.user.validateUser(legajo, pass);
             }
-
         }
         return this.validation;
     }
-
-    public void updatePersonalData(String field, String value) {
-        if (validation) {
-            this.user.updatePersonalData(field, value);
+    public void updatePersonalData(String field, String value){
+        if (validation){
+            this.user.updatePersonalData(field,value);
         }
     }
 
-    public Materia lookUpSubject(String name) {
-        if (validation) {
+    public Materia lookUpSubject (String name){
+        if (validation){
             return this.materiaBD.buscarPorNombre(name);
-        } else {
+        }
+        else{
             return null;
         }
     }
 
 
-    public boolean validation() {
+    public  boolean validation(){
         return this.validation;
     }
 
