@@ -62,7 +62,7 @@ High:
 
 04/06
 Low:
-* Pequeña desincronizacion con horarios a la ora de establecer una comunicacion 
+* Pequeña desincronizacion con horarios a la hora de establecer una comunicacion 
 
 High:
 * Conseguimos aumentar el ritmo de trabajo.
