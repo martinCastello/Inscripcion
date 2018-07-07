@@ -29,6 +29,8 @@ dependencies {
 
     compile 'mysql:mysql-connector-java:5.1.39'
 
+    compile 'com.googlecode.lanterna:lanterna:3.0.0-beta3'
+
 }
 
 repositories {
