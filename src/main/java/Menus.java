@@ -6,6 +6,8 @@ import Servicios.ServiciosProfesor;
 import Servicios.ServiciosUsuario;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Menus {
@@ -30,7 +32,6 @@ public class Menus {
             case "2":
                 this.clearScreen();
                 this.menuLoginProfesor();
-                //this.menuPrincipalProfesores();
                 break;
             case "3":
                 this.clearScreen();
@@ -63,8 +64,10 @@ public class Menus {
 
         Profesor profesor = service.logIn(legajo, clave);
         if(profesor != null){
-            this.menuPrincipalProfesores();
+            this.clearScreen();
+            this.menuPrincipalProfesores(profesor);
         }else{
+            this.clearScreen();
             System.out.println("Usuario/Password Incorrectas \n\n");
             this.menuLoginProfesor();
         }
@@ -88,20 +91,18 @@ public class Menus {
 
         Alumno alumno = service.logIn(legajo, clave);
         if(alumno != null){
+            this.clearScreen();
             this.menuPrincipalAlumnos(alumno);
         }else{
+            this.clearScreen();
             System.out.println("Usuario/Password Incorrectas \n\n");
             this.menuLoginAlumno();
         }
 
     }
 
-    public void menuPrincipalProfesores() throws Exception {
+    public void menuPrincipalProfesores(Profesor profesor) throws Exception {
         Scanner entradaEscaner = new Scanner(System.in);
-
-        //***********************PROVISIORIO*************************//
-        ProfesorBD profesorBD=new ProfesorBD();
-        //**********************************************************//
 
         System.out.println (
                 "Menu profesores: \n" +
@@ -116,11 +117,11 @@ public class Menus {
         switch (entradaTeclado){
             case "1":
                 this.clearScreen();
-                this.menuListarCursadas(profesorBD.buscarPorMail("dperez@unq.com"));
+                this.menuListarCursadas(profesor);
                 break;
             case "2":
                 this.clearScreen();
-                this.menuListarAlumnos(profesorBD.buscarPorMail("dperez@unq.com"));
+                this.menuListarAlumnos(profesor);
                 break;
             case "3":
                 this.clearScreen();
@@ -129,7 +130,7 @@ public class Menus {
             default:
                 this.clearScreen();
                 System.out.println("Opción invalida, reintente. \n");
-                this.menuPrincipalProfesores();
+                this.menuPrincipalProfesores(profesor);
                 break;
         }
     }
@@ -137,11 +138,6 @@ public class Menus {
     public void menuPrincipalAlumnos(Alumno alumno) throws Exception {
 
         Scanner entradaEscaner = new Scanner(System.in);
-
-        //***********************PROVISIORIO*************************//
-        //AlumnoBD alumnoBD=new AlumnoBD();
-        //Alumno alumno=alumnoBD.buscarPorId(1);
-        //**********************************************************//
 
         System.out.println (
                 "Menu alumnos: \n" +
@@ -165,7 +161,7 @@ public class Menus {
                 break;
             case "3":
                 this.clearScreen();
-                this.menuPrincipalInscripcion();
+                this.menuPrincipalInscripcion(alumno);
                 break;
             case "4":
                 this.clearScreen();
@@ -247,7 +243,7 @@ public class Menus {
         entradaEscaner.nextLine ();
 
         this.clearScreen();
-        this.menuPrincipalProfesores();
+        this.menuPrincipalProfesores(profesor);
 
 
     }
@@ -280,29 +276,43 @@ public class Menus {
         entradaEscaner.nextLine ();
 
         this.clearScreen();
-        this.menuPrincipalProfesores();
+        this.menuPrincipalProfesores(profesor);
 
 
 
     }
 
-    public void menuPrincipalInscripcion() throws Exception {
+    public void menuPrincipalInscripcion(Alumno alumno) throws Exception {
         Scanner entradaEscaner = new Scanner(System.in);
         CursadasBD cursadasBD=new CursadasBD();
         MateriaBD materiaBD=new MateriaBD();
+        List<Materia> materias = new ArrayList<>();
+        List<Cursadas> cursadas;
 
         System.out.println ("Seleccione una de las siguientes cursadas: \n");
 
-        for (Cursadas cursada: cursadasBD.listar()) {
+        if(alumno.getFoja().getHistorial().size()>0) {
+
+            for (Historial historial : alumno.getFoja().getHistorial()) {
+                Cursadas cursada = cursadasBD.buscarPorID(historial.getCursada_id());
+                Materia materia = materiaBD.buscarPorID(cursada.getMateria_id());
+                materias.add(materia);
+            }
+        }
+
+        List<Cursadas> cursadasAll = cursadasBD.listar();
+
+        for(Materia matter: materias){
+            cursadasAll.remove(cursadasBD.buscarPorIdMateria(matter.getId()));
+        }
+
+        cursadas = cursadasAll;
+
+        for (Cursadas cursada: cursadas) {
             System.out.println(cursada.getId() + " - "
                     + materiaBD.buscarPorID(cursada.getMateria_id()).info() + ", "
                     + cursada.getDias_y_horarios() + ". ");
         }
-
-        //***********************PROVISIORIO*************************//
-        AlumnoBD alumnoBD=new AlumnoBD();
-        Alumno alumno=alumnoBD.buscarPorMail("ogomez@unq.com");
-        //***********************************************************//
 
         //Invocamos un método sobre un objeto Scanner
         String entradaTeclado = entradaEscaner.nextLine ();
@@ -335,7 +345,7 @@ public class Menus {
     }
 
     public void clearScreen() {
-            for(int i=0;i<50;i++){
+            for(int i=0;i<20;i++){
                 System.out.print(" \n");
             }
     }
