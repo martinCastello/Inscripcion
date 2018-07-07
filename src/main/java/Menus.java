@@ -2,21 +2,21 @@ import BD.*;
 import Entidades.*;
 
 import Servicios.ServiciosAlumno;
+import Servicios.ServiciosProfesor;
+import Servicios.ServiciosUsuario;
 
 
 import java.util.Scanner;
 
 public class Menus {
 
-    //Creación de un objeto Scanner
-    Scanner entradaEscaner = new Scanner(System.in);
-
-    public void menuPrincipal(){
+    public void menuPrincipal() throws Exception {
+        Scanner entradaEscaner = new Scanner(System.in);
         System.out.println (
                 "Bienvenido a Inscripción. \n" +
                 "Ingrese una opción y presione intro: \n" +
-                    "1-Alumnos. \n" +
-                    "2-Profesores. \n" +
+                    "1-Alumno. \n" +
+                    "2-Profesor. \n" +
                     "3-Salir.");
 
         //Invocamos un método sobre un objeto Scanner
@@ -25,11 +25,12 @@ public class Menus {
         switch (entradaTeclado){
             case "1":
                 this.clearScreen();
-                this.menuPrincipalAlumnos();
+                this.menuLoginAlumno();
                 break;
             case "2":
                 this.clearScreen();
-                this.menuPrincipalProfesores();
+                this.menuLoginProfesor();
+                //this.menuPrincipalProfesores();
                 break;
             case "3":
                 this.clearScreen();
@@ -44,7 +45,59 @@ public class Menus {
 
     }
 
-    public void menuPrincipalProfesores(){
+    private void menuLoginProfesor() throws Exception {
+        Scanner entradaEscaner = new Scanner(System.in);
+        Scanner entradaEscaner2 = new Scanner(System.in);
+        ServiciosProfesor service = new ServiciosProfesor();
+        System.out.println (
+                "Iniciar Sesión: \n" +
+                        "\nUsuario: ");
+
+        //Invocamos un método sobre un objeto Scanner
+        int legajo = entradaEscaner.nextInt();
+
+        System.out.println (
+                "\nIngrese la contraseña: ");
+
+        String clave = entradaEscaner2.nextLine();
+
+        Profesor profesor = service.logIn(legajo, clave);
+        if(profesor != null){
+            this.menuPrincipalProfesores();
+        }else{
+            System.out.println("Usuario/Password Incorrectas \n\n");
+            this.menuLoginProfesor();
+        }
+    }
+
+    private void menuLoginAlumno() throws Exception {
+        Scanner entradaEscaner = new Scanner(System.in);
+        Scanner entradaEscaner2 = new Scanner(System.in);
+        ServiciosAlumno service = new ServiciosAlumno();
+        System.out.println (
+                "Iniciar Sesión: \n" +
+                        "\nUsuario: ");
+
+        //Invocamos un método sobre un objeto Scanner
+        int legajo = entradaEscaner.nextInt();
+
+        System.out.println (
+                        "\nIngrese la contraseña: ");
+
+        String clave = entradaEscaner2.nextLine();
+
+        Alumno alumno = service.logIn(legajo, clave);
+        if(alumno != null){
+            this.menuPrincipalAlumnos(alumno);
+        }else{
+            System.out.println("Usuario/Password Incorrectas \n\n");
+            this.menuLoginAlumno();
+        }
+
+    }
+
+    public void menuPrincipalProfesores() throws Exception {
+        Scanner entradaEscaner = new Scanner(System.in);
 
         //***********************PROVISIORIO*************************//
         ProfesorBD profesorBD=new ProfesorBD();
@@ -58,7 +111,7 @@ public class Menus {
 
 
         //Invocamos un método sobre un objeto Scanner
-        String entradaTeclado = entradaEscaner.nextLine ();
+        String entradaTeclado = entradaEscaner.nextLine();
 
         switch (entradaTeclado){
             case "1":
@@ -81,11 +134,13 @@ public class Menus {
         }
     }
 
-    public void menuPrincipalAlumnos(){
+    public void menuPrincipalAlumnos(Alumno alumno) throws Exception {
+
+        Scanner entradaEscaner = new Scanner(System.in);
 
         //***********************PROVISIORIO*************************//
-        AlumnoBD alumnoBD=new AlumnoBD();
-        Alumno alumno=alumnoBD.buscarPorId(1);
+        //AlumnoBD alumnoBD=new AlumnoBD();
+        //Alumno alumno=alumnoBD.buscarPorId(1);
         //**********************************************************//
 
         System.out.println (
@@ -119,12 +174,13 @@ public class Menus {
             default:
                 this.clearScreen();
                 System.out.println("Opción invalida, reintente. \n");
-                this.menuPrincipalAlumnos();
+                this.menuPrincipalAlumnos(alumno);
                 break;
         }
     }
 
-    private void menuMateriasRecomendadas(Alumno alumno){
+    private void menuMateriasRecomendadas(Alumno alumno) throws Exception {
+        Scanner entradaEscaner = new Scanner(System.in);
         System.out.println("Materias recomendadas:\n");
         System.out.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - \n");
         alumno.getFoja().generarMateriasAprobadas(alumno);
@@ -141,12 +197,13 @@ public class Menus {
         System.out.println ("Presione intro para volver\n");
 
         //Invocamos un método sobre un objeto Scanner
-        String entradaTeclado = entradaEscaner.nextLine ();
+        entradaEscaner.nextLine ();
         this.clearScreen();
-        this.menuPrincipalAlumnos();
+        this.menuPrincipalAlumnos(alumno);
     }
 
-    private void menuMostrarFoja(Alumno alumno) {
+    private void menuMostrarFoja(Alumno alumno) throws Exception {
+        Scanner entradaEscaner = new Scanner(System.in);
         System.out.println("Foja del alumno " +alumno.getNombre()+" "+alumno.getApellido()+", legajo: "+alumno.getLegajo() +"\n");
         System.out.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - \n");
         alumno.getFoja().generarHistorial();
@@ -168,11 +225,12 @@ public class Menus {
         //Invocamos un método sobre un objeto Scanner
         entradaEscaner.nextLine ();
         this.clearScreen();
-        this.menuPrincipalAlumnos();
+        this.menuPrincipalAlumnos(alumno);
 
     }
 
-    private void menuListarCursadas(Profesor profesor) {
+    private void menuListarCursadas(Profesor profesor) throws Exception {
+        Scanner entradaEscaner = new Scanner(System.in);
         CursadasBD cursadasBD=new CursadasBD();
         MateriaBD materiaBD=new MateriaBD();
         System.out.println ("Cursadas de "+profesor.getNombre()+" "+profesor.getApellido()+":  \n ");
@@ -186,7 +244,7 @@ public class Menus {
         System.out.println ("Presione intro para volver.  \n ");
 
         //Invocamos un método sobre un objeto Scanner
-        String entradaTeclado = entradaEscaner.nextLine ();
+        entradaEscaner.nextLine ();
 
         this.clearScreen();
         this.menuPrincipalProfesores();
@@ -194,7 +252,8 @@ public class Menus {
 
     }
 
-    private void menuListarAlumnos(Profesor profesor) {
+    private void menuListarAlumnos(Profesor profesor) throws Exception {
+        Scanner entradaEscaner = new Scanner(System.in);
         CursadasBD cursadasBD=new CursadasBD();
         MateriaBD materiaBD=new MateriaBD();
         InscripcionesBD inscripcionesBD = new InscripcionesBD();
@@ -218,7 +277,7 @@ public class Menus {
         System.out.println ("Presione intro para volver.  \n ");
 
         //Invocamos un método sobre un objeto Scanner
-        String entradaTeclado = entradaEscaner.nextLine ();
+        entradaEscaner.nextLine ();
 
         this.clearScreen();
         this.menuPrincipalProfesores();
@@ -227,7 +286,8 @@ public class Menus {
 
     }
 
-    public void menuPrincipalInscripcion(){
+    public void menuPrincipalInscripcion() throws Exception {
+        Scanner entradaEscaner = new Scanner(System.in);
         CursadasBD cursadasBD=new CursadasBD();
         MateriaBD materiaBD=new MateriaBD();
 
@@ -260,17 +320,17 @@ public class Menus {
                 this.clearScreen();
                 System.out.println("Te inscribiste en "+materia.info() + ", "
                         + cursada.getDias_y_horarios() +". \n");
-                this.menuPrincipalAlumnos();
+                this.menuPrincipalAlumnos(alumno);
             }
             else{
                 this.clearScreen();
                 System.out.println("Opción invalida, se vuelve al menu principal. \n");
-                this.menuPrincipalAlumnos();
+                this.menuPrincipalAlumnos(alumno);
             }
         }catch(Exception e){
             this.clearScreen();
             System.out.println("Opción invalida, se vuelve al menu principal. \n");
-            this.menuPrincipalAlumnos();
+            this.menuPrincipalAlumnos(alumno);
         }
     }
 

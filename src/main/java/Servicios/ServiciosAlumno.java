@@ -2,22 +2,26 @@ package Servicios;
 import BD.*;
 import Entidades.*;
 
-import javax.xml.ws.Service;
+import javax.crypto.ExemptionMechanismException;
 
 public class ServiciosAlumno extends ServiciosUsuario {
     private AlumnoBD alumnoBD= new AlumnoBD();
     private InscripcionesBD inscripcionesBD = new InscripcionesBD();
     private CursadasBD cursadasBD = new CursadasBD();
 
-    @Override
-    public boolean logIn(int legajo, String pass) {
+    public Alumno logIn(int legajo, String pass) throws Exception {
+        Alumno alumno = null;
         try{
             this.setUser(alumnoBD.buscarPorLegajo(legajo));
             this.setValidation(this.getUser().validateUser(legajo, pass));
+            if(this.getValidation()){
+                alumno = (Alumno) this.getUser();
+            }
         }catch (Exception e){
-            System.out.println("Usuario/Password Incorrectas \n");
+            System.out.println("\n");
         }
-        return this.getValidation();
+
+        return alumno;
     }
 
     public void inscribirACursada(int id_user, int id_cursada){

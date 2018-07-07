@@ -8,10 +8,10 @@ public abstract class ServiciosUsuario {
     private MateriaBD materiaBD= new MateriaBD();
 
 
-    public boolean logIn(int legajo, String pass)
-    {
-        return this.validation;
-    }
+    //public User logIn(int legajo, String pass)
+    //{
+    //    return this.validation;
+    //}
 
     public void updatePersonalData(String field, String value){
         if (validation){

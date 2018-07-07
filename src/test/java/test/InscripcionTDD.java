@@ -73,7 +73,7 @@ public class InscripcionTDD {
     }
 
     @Test
-    public void login(){
+    public void login() throws Exception {
         ProfesorBD profesorBD=new ProfesorBD();
         profesorBD.insertar(new Profesor(0, "Diego", "Perez",121,"diego@gmail.com", "1111"));
 
@@ -91,7 +91,7 @@ public class InscripcionTDD {
     }
 
     @Test
-    public void inscripcion_De_alumno_loggeado(){
+    public void inscripcion_De_alumno_loggeado() throws Exception {
         ProfesorBD profesorBD=new ProfesorBD();
         Profesor prof= new Profesor(0, "Diego", "Perez",121,"diego@gmail.com", "1111");
         profesorBD.insertar(prof);
