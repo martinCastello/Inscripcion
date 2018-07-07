@@ -80,9 +80,9 @@ public class InscripcionTDD {
         AlumnoBD alumnoBD =new AlumnoBD();
         alumnoBD.insertar(new Alumno(0, "Omar", "Gomez",123,1, "omar.gomez@gmail.com","1110"));
 
-        profServ.logIn(121,"1111", "profesor");
+        profServ.logIn(121,"1111");
 
-        aluServ.logIn(123,"1110","alumno");
+        aluServ.logIn(123,"1110");
 
         assert (profServ.validation());
         assert (aluServ.validation());
@@ -112,7 +112,7 @@ public class InscripcionTDD {
         alumnoBD.insertar(alumno);
         int idalu= alumnoBD.buscarPorLegajo(123).getId();
 
-        aluServ.logIn(123,"1110","alumno");
+        aluServ.logIn(123,"1110");
 
         aluServ.inscribirACursada(idalu,idcursada);
 

@@ -37,8 +37,8 @@ public class Menus {
                 break;
             default:
                 this.clearScreen();
+                System.out.println("Opción invalida, reintente.\n");
                 this.menuPrincipal();
-                System.out.println("Opción invalida, reintente.");
                 break;
         }
 
