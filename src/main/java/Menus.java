@@ -96,7 +96,7 @@ public class Menus {
         Alumno alumno = service.logIn(legajo, clave);
         if(alumno != null){
             this.clearScreen();
-            this.menuPrincipalAlumnos(alumno);
+            this.menuPrincipalAlumnos(service, alumno);
         }else{
             this.clearScreen();
             System.out.println("Usuario/Password Incorrectas \n\n");
@@ -139,7 +139,7 @@ public class Menus {
         }
     }
 
-    public void menuPrincipalAlumnos(Alumno alumno) throws Exception {
+    public void menuPrincipalAlumnos(ServiciosAlumno serviceAlumno, Alumno alumno) throws Exception {
 
         Scanner entradaEscaner = new Scanner(System.in);
 
@@ -157,15 +157,15 @@ public class Menus {
         switch (entradaTeclado){
             case "1":
                 this.clearScreen();
-                this.menuMostrarFoja(alumno);
+                this.menuMostrarFoja(serviceAlumno, alumno);
                 break;
             case "2":
                 this.clearScreen();
-                this.menuMateriasRecomendadas(alumno);
+                this.menuMateriasRecomendadas(serviceAlumno, alumno);
                 break;
             case "3":
                 this.clearScreen();
-                this.menuPrincipalInscripcion(alumno);
+                this.menuPrincipalInscripcion(serviceAlumno, alumno);
                 break;
             case "4":
                 this.clearScreen();
@@ -174,12 +174,12 @@ public class Menus {
             default:
                 this.clearScreen();
                 System.out.println("Opción invalida, reintente. \n");
-                this.menuPrincipalAlumnos(alumno);
+                this.menuPrincipalAlumnos(serviceAlumno, alumno);
                 break;
         }
     }
 
-    private void menuMateriasRecomendadas(Alumno alumno) throws Exception {
+    private void menuMateriasRecomendadas(ServiciosAlumno service, Alumno alumno) throws Exception {
         Scanner entradaEscaner = new Scanner(System.in);
         System.out.println("Materias recomendadas:\n");
         System.out.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - \n");
@@ -199,10 +199,10 @@ public class Menus {
         //Invocamos un método sobre un objeto Scanner
         entradaEscaner.nextLine ();
         this.clearScreen();
-        this.menuPrincipalAlumnos(alumno);
+        this.menuPrincipalAlumnos(service, alumno);
     }
 
-    private void menuMostrarFoja(Alumno alumno) throws Exception {
+    private void menuMostrarFoja(ServiciosAlumno service, Alumno alumno) throws Exception {
         Scanner entradaEscaner = new Scanner(System.in);
         System.out.println("Foja del alumno " +alumno.getNombre()+" "+alumno.getApellido()+", legajo: "+alumno.getLegajo() +"\n");
         System.out.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - \n");
@@ -225,7 +225,7 @@ public class Menus {
         //Invocamos un método sobre un objeto Scanner
         entradaEscaner.nextLine ();
         this.clearScreen();
-        this.menuPrincipalAlumnos(alumno);
+        this.menuPrincipalAlumnos(service, alumno);
 
     }
 
@@ -282,11 +282,9 @@ public class Menus {
         this.clearScreen();
         this.menuPrincipalProfesores(profesor);
 
-
-
     }
 
-    public void menuPrincipalInscripcion(Alumno alumno) throws Exception {
+    public void menuPrincipalInscripcion(ServiciosAlumno serviceAlumno, Alumno alumno) throws Exception {
         Scanner entradaEscaner = new Scanner(System.in);
         CursadasBD cursadasBD=new CursadasBD();
         MateriaBD materiaBD=new MateriaBD();
@@ -295,6 +293,8 @@ public class Menus {
         List<Cursadas> cursadas = new ArrayList<>();
         List<Integer> materias_id = new ArrayList<>();
         List<Integer> cursadas_id = new ArrayList<>();
+        List<Cursadas> cursadasEnResumen = new ArrayList<>();
+        List<Integer> cursadasInscripto_id = new ArrayList<>();
 
         System.out.println ("Seleccione una de las siguientes cursadas: \n");
 
@@ -316,7 +316,19 @@ public class Menus {
         //Validacion cupo
         cursadas = cursadas.stream().filter(cursada->cursada.getCupo()>0).collect(Collectors.toList());
 
-        for (Cursadas cursada: cursadas) {
+        //Validacion. Omitir cursadas inscripto
+        for(Cursadas cursada:serviceAlumno.getCursadasInscripto()){
+            cursadasInscripto_id.add(cursada.getId());
+        }
+        for(Cursadas cursada:cursadas){
+            if(cursadasInscripto_id.contains(cursada.getId())){
+                continue;
+            }else{
+                cursadasEnResumen.add(cursada);
+            }
+        }
+
+        for (Cursadas cursada: cursadasEnResumen) {
             cursadas_id.add(cursada.getId());
             System.out.println(cursada.getId() + " - "
                     + materiaBD.buscarPorID(cursada.getMateria_id()).info() + ", "
@@ -333,23 +345,22 @@ public class Menus {
                 //inscripcionesBD.insertar(new Inscripciones(0,alumno.getId(),entrada.intValue()));
                 Cursadas cursada=cursadasBD.buscarPorID(entrada.intValue());
                 Materia materia = materiaBD.buscarPorID(cursada.getMateria_id());
-                ServiciosAlumno serviceAlumno = new ServiciosAlumno();
                 serviceAlumno.inscribirACursada(alumno.getId(), entrada.intValue());
 
                 this.clearScreen();
                 System.out.println("Te inscribiste en "+materia.info() + ", "
                         + cursada.getDias_y_horarios() +". \n");
-                this.menuPrincipalAlumnos(alumno);
+                this.menuPrincipalAlumnos(serviceAlumno, alumno);
             }
             else{
                 this.clearScreen();
                 System.out.println("Opción invalida, se vuelve al menu principal. \n");
-                this.menuPrincipalAlumnos(alumno);
+                this.menuPrincipalAlumnos(serviceAlumno, alumno);
             }
         }catch(Exception e){
             this.clearScreen();
             System.out.println("Opción invalida, se vuelve al menu principal. \n");
-            this.menuPrincipalAlumnos(alumno);
+            this.menuPrincipalAlumnos(serviceAlumno, alumno);
         }
     }
 

@@ -268,7 +268,7 @@ public class CursadasBD {
         cursadas.add(new Cursadas(0,"Martes 12 a 15 hs y jueves 12 a 15 hs.",4, "A21",30,4));
         cursadas.add(new Cursadas(0,"Martes 18 a 21 hs y jueves 18 a 21 hs.",4, "A21",30,4));
         //OBJETOS III - PROFESOR: PEDRO
-        cursadas.add(new Cursadas(0,"Lunes 12 a 15 hs y jueves 12 a 15 hs.",5, "B21",30,5));
+        cursadas.add(new Cursadas(0,"Lunes 12 a 15 hs y jueves 12 a 15 hs.",5, "B21",2,5));
         cursadas.add(new Cursadas(0,"Lunes 18 a 21 hs y jueves 18 a 21 hs.",5, "B21",0,5));
 
 

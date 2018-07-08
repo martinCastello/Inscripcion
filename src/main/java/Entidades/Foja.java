@@ -55,4 +55,5 @@ public class Foja {
         this.materiasAprobadas=materiasAprobadas;
 
     }
+
 }
