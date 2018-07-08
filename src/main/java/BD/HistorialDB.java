@@ -154,7 +154,7 @@ public class HistorialDB {
         historiales.add(new Historial(0,1,3, 6,"06/2018"));
         historiales.add(new Historial(0,1,5, 6,"12/2017"));
         historiales.add(new Historial(0,1,7, 6,"12/2017"));
-        historiales.add(new Historial(0,1,9, 6,"12/2017"));
+        //historiales.add(new Historial(0,1,9, 6,"12/2017"));
 
         for (Historial historial:historiales) {
             this.insertar(historial);

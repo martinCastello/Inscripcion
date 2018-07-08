@@ -4,11 +4,15 @@ import Entidades.*;
 import Servicios.ServiciosAlumno;
 import Servicios.ServiciosProfesor;
 import Servicios.ServiciosUsuario;
+import sun.util.resources.cldr.aa.CurrencyNames_aa;
 
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Menus {
 
@@ -289,22 +293,31 @@ public class Menus {
         List<Materia> materias = new ArrayList<>();
         List<Cursadas> cursadasAll = new ArrayList<>();
         List<Cursadas> cursadas = new ArrayList<>();
+        List<Integer> materias_id = new ArrayList<>();
+        List<Integer> cursadas_id = new ArrayList<>();
 
         System.out.println ("Seleccione una de las siguientes cursadas: \n");
 
+        //Validacion. Omitir materias aprobadas
         alumno.getFoja().generarMateriasAprobadas();
-
         materias.addAll(alumno.getFoja().getMateriasAprobadas());
-
+        for(Materia materia:materias){
+            materias_id.add(materia.getId());
+        }
         cursadasAll.addAll(cursadasBD.listar());
-
-        for(Materia matter: materias){
-            cursadasAll.remove(cursadasBD.buscarPorIdMateria(matter.getId()));
+        for(Cursadas cursada : cursadasAll){
+            if(materias_id.contains(cursada.getMateria_id())){
+                continue;
+            }else{
+                cursadas.add(cursada);
+            }
         }
 
-        cursadas.addAll(cursadasAll);
+        //Validacion cupo
+        cursadas = cursadas.stream().filter(cursada->cursada.getCupo()>0).collect(Collectors.toList());
 
         for (Cursadas cursada: cursadas) {
+            cursadas_id.add(cursada.getId());
             System.out.println(cursada.getId() + " - "
                     + materiaBD.buscarPorID(cursada.getMateria_id()).info() + ", "
                     + cursada.getDias_y_horarios() + ". ");
@@ -315,7 +328,7 @@ public class Menus {
         Integer entrada = 0;
         try{
             entrada=Integer.parseInt(entradaTeclado);
-            if(entrada.intValue()>0&&entrada.intValue()<=cursadasBD.listar().size()){
+            if(cursadas_id.contains(entrada.intValue())){
                 //InscripcionesBD inscripcionesBD=new InscripcionesBD();
                 //inscripcionesBD.insertar(new Inscripciones(0,alumno.getId(),entrada.intValue()));
                 Cursadas cursada=cursadasBD.buscarPorID(entrada.intValue());
