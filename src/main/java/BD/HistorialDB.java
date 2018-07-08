@@ -150,11 +150,13 @@ public class HistorialDB {
 
         List<Historial> historiales=new ArrayList<Historial>();
 
-        historiales.add(new Historial(0,1,1, 6,"06/2018"));
-        historiales.add(new Historial(0,1,3, 6,"06/2018"));
-        historiales.add(new Historial(0,1,5, 6,"12/2017"));
-        historiales.add(new Historial(0,1,7, 6,"12/2017"));
-        //historiales.add(new Historial(0,1,9, 6,"12/2017"));
+        historiales.add(new Historial(0,1,1, 6,"06/2018"));//Matematica I
+        historiales.add(new Historial(0,1,3, 6,"06/2018"));//Matematica II
+        historiales.add(new Historial(0,1,5, 6,"12/2017"));//Objetos I
+        historiales.add(new Historial(0,1,7, 6,"12/2017"));//Objetos II
+
+        historiales.add(new Historial(0,2,1, 6,"06/2018"));//Matematica I
+        historiales.add(new Historial(0,2,9, 6,"12/2017"));//Base de Datos
 
         for (Historial historial:historiales) {
             this.insertar(historial);
