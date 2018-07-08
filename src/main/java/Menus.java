@@ -179,7 +179,7 @@ public class Menus {
         Scanner entradaEscaner = new Scanner(System.in);
         System.out.println("Materias recomendadas:\n");
         System.out.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - \n");
-        alumno.getFoja().generarMateriasAprobadas(alumno);
+        alumno.getFoja().generarMateriasAprobadas();
         MateriaBD materiaBD=new MateriaBD();
        for(Materia materia:materiaBD.listar()){
             if(materia.esRecomenada(alumno)){
@@ -287,26 +287,22 @@ public class Menus {
         CursadasBD cursadasBD=new CursadasBD();
         MateriaBD materiaBD=new MateriaBD();
         List<Materia> materias = new ArrayList<>();
-        List<Cursadas> cursadas;
+        List<Cursadas> cursadasAll = new ArrayList<>();
+        List<Cursadas> cursadas = new ArrayList<>();
 
         System.out.println ("Seleccione una de las siguientes cursadas: \n");
 
-        if(alumno.getFoja().getHistorial().size()>0) {
+        alumno.getFoja().generarMateriasAprobadas();
 
-            for (Historial historial : alumno.getFoja().getHistorial()) {
-                Cursadas cursada = cursadasBD.buscarPorID(historial.getCursada_id());
-                Materia materia = materiaBD.buscarPorID(cursada.getMateria_id());
-                materias.add(materia);
-            }
-        }
+        materias.addAll(alumno.getFoja().getMateriasAprobadas());
 
-        List<Cursadas> cursadasAll = cursadasBD.listar();
+        cursadasAll.addAll(cursadasBD.listar());
 
         for(Materia matter: materias){
             cursadasAll.remove(cursadasBD.buscarPorIdMateria(matter.getId()));
         }
 
-        cursadas = cursadasAll;
+        cursadas.addAll(cursadasAll);
 
         for (Cursadas cursada: cursadas) {
             System.out.println(cursada.getId() + " - "
