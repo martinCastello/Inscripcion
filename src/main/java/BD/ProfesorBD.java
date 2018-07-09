@@ -110,6 +110,8 @@ public class ProfesorBD {
         profesores.add(new Profesor(0,"Jose","Fernanadez", 003,"jernanadez@unq.com","jernanadez"));
         profesores.add(new Profesor(0,"Manuel","Gonzalez", 004,"mgonzalez@unq.com","mgonzalez"));
         profesores.add(new Profesor(0,"Pedro","Lopez", 005,"plopez@unq.com","plopez"));
+        profesores.add(new Profesor(0,"Raul","Re", 006,"rre@unq.com","rre"));
+        profesores.add(new Profesor(0,"Pablo","Toledo", 007,"ptoledo@unq.com","ptoledo"));
 
 
         for (Profesor profesor:profesores) {

@@ -255,21 +255,57 @@ public class CursadasBD {
         Connection cn = cc.ConectarBD();
 
         List<Cursadas> cursadas=new ArrayList<Cursadas>();
-        //MATEMATICA I - PROFESOR: DIEGO
-        cursadas.add(new Cursadas(0,"Lunes 12 a 16 hs",1, "A23",30,1));
-        cursadas.add(new Cursadas(0,"Lunes 18 a 22 hs",1, "A23",30,1));
-        //MATEMATICA II - PROFESOR: CARLOS
-        cursadas.add(new Cursadas(0,"Martes 12 a 16 hs",2, "A23",30,2));
-        cursadas.add(new Cursadas(0,"Martes 18 a 22 hs",2, "A23",30,2));
-        //OBJETOS I - PROFESOR: JOSE
+
+        //OBJETOS I - PROFESOR: JOSE - 2016 1er cuatrimestre
+        cursadas.add(new Cursadas(0,"Miercoles 12 a 15 hs y viernes 12 a 15 hs.",3, "A27",0,3));
+        cursadas.add(new Cursadas(0,"Miercoles 18 a 22 hs y viernes 18 a 21 hs.",3, "A27",0,3));
+        //OBJETOS II - PROFESOR: MANUEL - 2016 2do cuatrimestre
+        cursadas.add(new Cursadas(0,"Martes 12 a 15 hs y jueves 12 a 15 hs.",4, "A21",0,4));
+        cursadas.add(new Cursadas(0,"Martes 18 a 21 hs y jueves 18 a 21 hs.",4, "A21",0,4));
+        //MATEMATICA I - PROFESOR: DIEGO - 2016 1er cuatrimestre
+        cursadas.add(new Cursadas(0,"Lunes 12 a 16 hs",1, "A23",0,1));
+        cursadas.add(new Cursadas(0,"Lunes 18 a 22 hs",1, "A23",0,1));
+        //MATEMATICA II - PROFESOR: CARLOS - 2016 2do cuatrimestre
+        cursadas.add(new Cursadas(0,"Martes 12 a 16 hs",2, "A23",0,2));
+        cursadas.add(new Cursadas(0,"Martes 18 a 22 hs",2, "A23",0,2));
+        //BASE DE DATOS - PROFESOR: PEDRO - 2016 2do cuatrimestre
+        cursadas.add(new Cursadas(0,"Lunes 12 a 15 hs y jueves 12 a 15 hs.",5, "B21",0,5));
+        cursadas.add(new Cursadas(0,"Lunes 18 a 21 hs y jueves 18 a 21 hs.",5, "B21",0,5));
+        //INTERFACES DE USUARIO - PROFESOR: PEDRO - 2017 - 1er cuatrimestre
+        cursadas.add(new Cursadas(0,"Jueves 18 a 22 hs.",8, "B21",0,5));
+        //ESTRATEGIA DE PERSISTENCIA - PROFESOR: MANUEL - 2017 - 1er cuatrimestre
+        cursadas.add(new Cursadas(0,"Viernes 18 a 22 hs.",9, "37B",0,4));
+
+        //INTRODUCCION A LA PROGRAMACION - PROFESOR: DIEGO PEREZ - 2018 1er cuatrimestre
+        cursadas.add(new Cursadas(0,"Martes 16 a 20 hs",12, "213",1,1));
+        //ORGANIZACION DE COMPUTADORAS - PROFESOR: CARLOS GOMEZ - 2018 1er cuatrimestre
+        cursadas.add(new Cursadas(0,"Lunes 12 a 16 hs",11, "213",30,2));
+        //OBJETOS I - PROFESOR: JOSE FERNANDEZ - 2018 1er cuatrimestre
         cursadas.add(new Cursadas(0,"Miercoles 12 a 15 hs y viernes 12 a 15 hs.",3, "A27",30,3));
         cursadas.add(new Cursadas(0,"Miercoles 18 a 22 hs y viernes 18 a 21 hs.",3, "A27",30,3));
-        //OBJETOS II - PROFESOR: MANUEL
+        //OBJETOS II - PROFESOR: MANUEL GONZALEZ - 2018 1er cuatrimestre
         cursadas.add(new Cursadas(0,"Martes 12 a 15 hs y jueves 12 a 15 hs.",4, "A21",30,4));
         cursadas.add(new Cursadas(0,"Martes 18 a 21 hs y jueves 18 a 21 hs.",4, "A21",30,4));
-        //BASE DE DATOS - PROFESOR: PEDRO
+        //MATEMATICA I - PROFESOR: DIEGO PEREZ - 2018 1er cuatrimestre
+        cursadas.add(new Cursadas(0,"Lunes 12 a 16 hs",1, "A23",30,1));
+        cursadas.add(new Cursadas(0,"Lunes 18 a 22 hs",1, "A23",30,1));
+        //MATEMATICA II - PROFESOR: CARLOS GOMEZ - 2018 1er cuatrimestre
+        cursadas.add(new Cursadas(0,"Martes 12 a 16 hs",2, "A23",30,2));
+        cursadas.add(new Cursadas(0,"Martes 18 a 22 hs",2, "A23",0,2));
+        //BASE DE DATOS - PROFESOR: PEDRO LOPEZ - 2018 1er cuatrimestre
         cursadas.add(new Cursadas(0,"Lunes 12 a 15 hs y jueves 12 a 15 hs.",5, "B21",2,5));
         cursadas.add(new Cursadas(0,"Lunes 18 a 21 hs y jueves 18 a 21 hs.",5, "B21",0,5));
+        //INTERFACES DE USUARIO - PROFESOR: PEDRO LOPEZ - 2018 - 1er cuatrimestre
+        cursadas.add(new Cursadas(0,"Viernes 18 a 22 hs.",8, "B21",1,5));
+        //ESTRATEGIA DE PERSISTENCIA - PROFESOR: MANUEL GONZALEZ - 2018 - 1er cuatrimestre
+        cursadas.add(new Cursadas(0,"Viernes 14 a 18 hs.",9, "37B",1,4));
+        //REDES - PROFESOR: RAUL RE - 2018 - 1er cuatrimestre
+        cursadas.add(new Cursadas(0,"Viernes 16 a 19 hs.",7, "203",30,6));
+        //ESTRUCTURAS DE DATOS - PROFESOR: PABLO TOLEDO - 2018 - 1er cuatrimestre
+        cursadas.add(new Cursadas(0,"Viernes 16 a 19 hs.",6, "205",30,7));
+        //PRACTICAS DE DESARROLLO DE SOFTWARE - PROFESOR: PABLO TOLEDO - 2018 - 1er cuatrimestre
+        cursadas.add(new Cursadas(0,"Lunes 18 a 22 hs y jueves 18 a 22 hs.",10, "205",30,7));
+
 
 
         for (Cursadas cursada:cursadas) {

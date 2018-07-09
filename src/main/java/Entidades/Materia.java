@@ -59,7 +59,10 @@ public class Materia {
     public boolean esRecomenada(Alumno alumno){
         boolean retorno=!alumno.getFoja().getMateriasAprobadas().contains(this);
         for (Materia materia : correlativas) {
-            retorno = retorno && alumno.getFoja().getMateriasAprobadas().contains(materia) ;
+            if(!alumno.getFoja().getMateriasAprobadas().contains(materia)){
+                retorno = false;
+                break;
+            }
         }
 
 

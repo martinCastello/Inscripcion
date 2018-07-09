@@ -294,7 +294,7 @@ public class Menus {
         List<Integer> materias_id = new ArrayList<>();
         List<Integer> cursadas_id = new ArrayList<>();
         List<Cursadas> cursadasEnResumen = new ArrayList<>();
-        List<Integer> cursadasInscripto_id = new ArrayList<>();
+        List<Integer> cursadasInscripto_idMateria = new ArrayList<>();
 
         System.out.println ("Seleccione una de las siguientes cursadas: \n");
 
@@ -318,10 +318,10 @@ public class Menus {
 
         //Validacion. Omitir cursadas inscripto
         for(Cursadas cursada:serviceAlumno.getCursadasInscripto()){
-            cursadasInscripto_id.add(cursada.getId());
+            cursadasInscripto_idMateria.add(cursada.getMateria_id());
         }
         for(Cursadas cursada:cursadas){
-            if(cursadasInscripto_id.contains(cursada.getId())){
+            if(cursadasInscripto_idMateria.contains(cursada.getMateria_id())){
                 continue;
             }else{
                 cursadasEnResumen.add(cursada);
