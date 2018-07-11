@@ -21,8 +21,7 @@ Nro | Nombre        | Legajo | Mail
 
 ### Burndown chart
 
-![captura de pantalla de 2018-07-04 17-21-15](https://user-images.githubusercontent.com/31372437/42293220-07b6ab32-7faf-11e8-9afe-332f29618295.png)
-
+![captura de pantalla de 2018-07-10 21-58-39](https://user-images.githubusercontent.com/31372437/42545225-04f123cc-848d-11e8-858b-cbf2e204c62d.png)
 
 ### Retrospectiva:
 30/05
@@ -67,6 +66,13 @@ Low:
 High:
 * Conseguimos aumentar el ritmo de trabajo.
 
+11/06
+Low:
+* No se llego con el tiempo necesario (sprints) para cuminar el trabajo
+
+High:
+* Se volvio al ritmo de trabajo normal para llevarlo constante
+
 ## Inscripción
 
 El objetivo es implementar parcialmente el modelo de Inscripción de Materias de la Universidad Nacional de Quilmes.
@@ -77,10 +83,9 @@ El objetivo es implementar parcialmente el modelo de Inscripción de Materias de
 
 ### Metodología
 
-1. Programación orientada a objetos + ATDD 
-2. A la hora de integrar los cambios de varios desarrolladores, utilizar el flujo de trabajo Feature Branch simulando un repositorio privado (branching model + fork).
-3. Cada cambio necesita ser integrado con la mayor frecuencia posiblie, utilizando para la verificación de este un servicio de CI (Continous Integration). [1]
-4. Se harán pasos cortos para mantener la integración funcionando.
+1. A la hora de integrar los cambios de varios desarrolladores, utilizar el flujo de trabajo Feature Branch simulando un repositorio privado (branching model + fork).
+2. Cada cambio necesita ser integrado con la mayor frecuencia posiblie, utilizando para la verificación de este un servicio de CI (Continous Integration). [1]
+3. Se harán pasos cortos para mantener la integración funcionando.
 
 ### Pasos
 
