@@ -165,7 +165,13 @@ public class Menus {
                 break;
             case "3":
                 this.clearScreen();
-                this.menuPrincipalInscripcion(serviceAlumno, alumno);
+                if(alumno.getRegular() == 1){
+                    this.menuPrincipalInscripcion(serviceAlumno, alumno);
+                }else{
+                    System.out.println("Usted no es un alumno regular, por favor enviar un mail a " +
+                            "tpi@unq.edu.ar con el asunto regularidad y su numero de legajo\n\n");
+                    this.menuPrincipalAlumnos(serviceAlumno, alumno);
+                }
                 break;
             case "4":
                 this.clearScreen();
