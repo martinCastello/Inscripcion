@@ -40,7 +40,7 @@ public class Foja {
         this.historial=historialDB.buscarPorAlumnoId(this.alumno.getId());
     }
 
-    public void generarMateriasAprobadas(Alumno alumno){
+    public void generarMateriasAprobadas(){
         ArrayList<Materia>materiasAprobadas=new ArrayList<>();
         HistorialDB historialDB=new HistorialDB();
         CursadasBD cursadasBD=new CursadasBD();
@@ -55,4 +55,5 @@ public class Foja {
         this.materiasAprobadas=materiasAprobadas;
 
     }
+
 }

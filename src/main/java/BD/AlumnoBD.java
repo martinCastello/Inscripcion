@@ -125,7 +125,8 @@ public class AlumnoBD {
         List<Alumno> alumnos=new ArrayList<Alumno>();
 
         alumnos.add(new Alumno(0,"Omar","Gomez", 001,1,"ogomez@unq.com","ogomez"));
-
+        alumnos.add(new Alumno(0,"Mariel","Lopez", 002,1,"mlopez@unq.com","mlopez"));
+        alumnos.add(new Alumno(0,"Gisele","Escobar", 003,1,"gescobar@unq.com","gescobar"));
 
         for (Alumno alumno:alumnos) {
             this.insertar(alumno);

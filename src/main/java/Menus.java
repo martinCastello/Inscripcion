@@ -2,21 +2,27 @@ import BD.*;
 import Entidades.*;
 
 import Servicios.ServiciosAlumno;
+import Servicios.ServiciosProfesor;
+import Servicios.ServiciosUsuario;
+import sun.util.resources.cldr.aa.CurrencyNames_aa;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Menus {
 
-    //Creación de un objeto Scanner
-    Scanner entradaEscaner = new Scanner(System.in);
-
-    public void menuPrincipal(){
+    public void menuPrincipal() throws Exception {
+        Scanner entradaEscaner = new Scanner(System.in);
         System.out.println (
                 "Bienvenido a Inscripción. \n" +
                 "Ingrese una opción y presione intro: \n" +
-                    "1-Alumnos. \n" +
-                    "2-Profesores. \n" +
+                    "1-Alumno. \n" +
+                    "2-Profesor. \n" +
                     "3-Salir.");
 
         //Invocamos un método sobre un objeto Scanner
@@ -25,11 +31,11 @@ public class Menus {
         switch (entradaTeclado){
             case "1":
                 this.clearScreen();
-                this.menuPrincipalAlumnos();
+                this.menuLoginAlumno();
                 break;
             case "2":
                 this.clearScreen();
-                this.menuPrincipalProfesores();
+                this.menuLoginProfesor();
                 break;
             case "3":
                 this.clearScreen();
@@ -37,18 +43,70 @@ public class Menus {
                 break;
             default:
                 this.clearScreen();
+                System.out.println("Opción invalida, reintente.\n");
                 this.menuPrincipal();
-                System.out.println("Opción invalida, reintente.");
                 break;
         }
 
     }
 
-    public void menuPrincipalProfesores(){
+    private void menuLoginProfesor() throws Exception {
+        Scanner entradaEscaner = new Scanner(System.in);
+        Scanner entradaEscaner2 = new Scanner(System.in);
+        ServiciosProfesor service = new ServiciosProfesor();
+        System.out.println (
+                "Iniciar Sesión: \n" +
+                        "\nUsuario: ");
 
-        //***********************PROVISIORIO*************************//
-        ProfesorBD profesorBD=new ProfesorBD();
-        //**********************************************************//
+        //Invocamos un método sobre un objeto Scanner
+        int legajo = entradaEscaner.nextInt();
+
+        System.out.println (
+                "\nIngrese la contraseña: ");
+
+        String clave = entradaEscaner2.nextLine();
+
+        Profesor profesor = service.logIn(legajo, clave);
+        if(profesor != null){
+            this.clearScreen();
+            this.menuPrincipalProfesores(profesor);
+        }else{
+            this.clearScreen();
+            System.out.println("Usuario/Password Incorrectas \n\n");
+            this.menuLoginProfesor();
+        }
+    }
+
+    private void menuLoginAlumno() throws Exception {
+        Scanner entradaEscaner = new Scanner(System.in);
+        Scanner entradaEscaner2 = new Scanner(System.in);
+        ServiciosAlumno service = new ServiciosAlumno();
+        System.out.println (
+                "Iniciar Sesión: \n" +
+                        "\nUsuario: ");
+
+        //Invocamos un método sobre un objeto Scanner
+        int legajo = entradaEscaner.nextInt();
+
+        System.out.println (
+                        "\nIngrese la contraseña: ");
+
+        String clave = entradaEscaner2.nextLine();
+
+        Alumno alumno = service.logIn(legajo, clave);
+        if(alumno != null){
+            this.clearScreen();
+            this.menuPrincipalAlumnos(service, alumno);
+        }else{
+            this.clearScreen();
+            System.out.println("Usuario/Password Incorrectas \n\n");
+            this.menuLoginAlumno();
+        }
+
+    }
+
+    public void menuPrincipalProfesores(Profesor profesor) throws Exception {
+        Scanner entradaEscaner = new Scanner(System.in);
 
         System.out.println (
                 "Menu profesores: \n" +
@@ -58,16 +116,16 @@ public class Menus {
 
 
         //Invocamos un método sobre un objeto Scanner
-        String entradaTeclado = entradaEscaner.nextLine ();
+        String entradaTeclado = entradaEscaner.nextLine();
 
         switch (entradaTeclado){
             case "1":
                 this.clearScreen();
-                this.menuListarCursadas(profesorBD.buscarPorMail("dperez@unq.com"));
+                this.menuListarCursadas(profesor);
                 break;
             case "2":
                 this.clearScreen();
-                this.menuListarAlumnos(profesorBD.buscarPorMail("dperez@unq.com"));
+                this.menuListarAlumnos(profesor);
                 break;
             case "3":
                 this.clearScreen();
@@ -76,17 +134,14 @@ public class Menus {
             default:
                 this.clearScreen();
                 System.out.println("Opción invalida, reintente. \n");
-                this.menuPrincipalProfesores();
+                this.menuPrincipalProfesores(profesor);
                 break;
         }
     }
 
-    public void menuPrincipalAlumnos(){
+    public void menuPrincipalAlumnos(ServiciosAlumno serviceAlumno, Alumno alumno) throws Exception {
 
-        //***********************PROVISIORIO*************************//
-        AlumnoBD alumnoBD=new AlumnoBD();
-        Alumno alumno=alumnoBD.buscarPorId(1);
-        //**********************************************************//
+        Scanner entradaEscaner = new Scanner(System.in);
 
         System.out.println (
                 "Menu alumnos: \n" +
@@ -102,15 +157,21 @@ public class Menus {
         switch (entradaTeclado){
             case "1":
                 this.clearScreen();
-                this.menuMostrarFoja(alumno);
+                this.menuMostrarFoja(serviceAlumno, alumno);
                 break;
             case "2":
                 this.clearScreen();
-                this.menuMateriasRecomendadas(alumno);
+                this.menuMateriasRecomendadas(serviceAlumno, alumno);
                 break;
             case "3":
                 this.clearScreen();
-                this.menuPrincipalInscripcion();
+                if(alumno.getRegular() == 1){
+                    this.menuPrincipalInscripcion(serviceAlumno, alumno);
+                }else{
+                    System.out.println("Usted no es un alumno regular, por favor enviar un mail a " +
+                            "tpi@unq.edu.ar con el asunto regularidad y su numero de legajo\n\n");
+                    this.menuPrincipalAlumnos(serviceAlumno, alumno);
+                }
                 break;
             case "4":
                 this.clearScreen();
@@ -119,15 +180,16 @@ public class Menus {
             default:
                 this.clearScreen();
                 System.out.println("Opción invalida, reintente. \n");
-                this.menuPrincipalAlumnos();
+                this.menuPrincipalAlumnos(serviceAlumno, alumno);
                 break;
         }
     }
 
-    private void menuMateriasRecomendadas(Alumno alumno){
+    private void menuMateriasRecomendadas(ServiciosAlumno service, Alumno alumno) throws Exception {
+        Scanner entradaEscaner = new Scanner(System.in);
         System.out.println("Materias recomendadas:\n");
         System.out.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - \n");
-        alumno.getFoja().generarMateriasAprobadas(alumno);
+        alumno.getFoja().generarMateriasAprobadas();
         MateriaBD materiaBD=new MateriaBD();
        for(Materia materia:materiaBD.listar()){
             if(materia.esRecomenada(alumno)){
@@ -141,12 +203,13 @@ public class Menus {
         System.out.println ("Presione intro para volver\n");
 
         //Invocamos un método sobre un objeto Scanner
-        String entradaTeclado = entradaEscaner.nextLine ();
+        entradaEscaner.nextLine ();
         this.clearScreen();
-        this.menuPrincipalAlumnos();
+        this.menuPrincipalAlumnos(service, alumno);
     }
 
-    private void menuMostrarFoja(Alumno alumno) {
+    private void menuMostrarFoja(ServiciosAlumno service, Alumno alumno) throws Exception {
+        Scanner entradaEscaner = new Scanner(System.in);
         System.out.println("Foja del alumno " +alumno.getNombre()+" "+alumno.getApellido()+", legajo: "+alumno.getLegajo() +"\n");
         System.out.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - \n");
         alumno.getFoja().generarHistorial();
@@ -168,11 +231,12 @@ public class Menus {
         //Invocamos un método sobre un objeto Scanner
         entradaEscaner.nextLine ();
         this.clearScreen();
-        this.menuPrincipalAlumnos();
+        this.menuPrincipalAlumnos(service, alumno);
 
     }
 
-    private void menuListarCursadas(Profesor profesor) {
+    private void menuListarCursadas(Profesor profesor) throws Exception {
+        Scanner entradaEscaner = new Scanner(System.in);
         CursadasBD cursadasBD=new CursadasBD();
         MateriaBD materiaBD=new MateriaBD();
         System.out.println ("Cursadas de "+profesor.getNombre()+" "+profesor.getApellido()+":  \n ");
@@ -186,15 +250,16 @@ public class Menus {
         System.out.println ("Presione intro para volver.  \n ");
 
         //Invocamos un método sobre un objeto Scanner
-        String entradaTeclado = entradaEscaner.nextLine ();
+        entradaEscaner.nextLine ();
 
         this.clearScreen();
-        this.menuPrincipalProfesores();
+        this.menuPrincipalProfesores(profesor);
 
 
     }
 
-    private void menuListarAlumnos(Profesor profesor) {
+    private void menuListarAlumnos(Profesor profesor) throws Exception {
+        Scanner entradaEscaner = new Scanner(System.in);
         CursadasBD cursadasBD=new CursadasBD();
         MateriaBD materiaBD=new MateriaBD();
         InscripcionesBD inscripcionesBD = new InscripcionesBD();
@@ -218,64 +283,95 @@ public class Menus {
         System.out.println ("Presione intro para volver.  \n ");
 
         //Invocamos un método sobre un objeto Scanner
-        String entradaTeclado = entradaEscaner.nextLine ();
+        entradaEscaner.nextLine ();
 
         this.clearScreen();
-        this.menuPrincipalProfesores();
-
-
+        this.menuPrincipalProfesores(profesor);
 
     }
 
-    public void menuPrincipalInscripcion(){
+    public void menuPrincipalInscripcion(ServiciosAlumno serviceAlumno, Alumno alumno) throws Exception {
+        Scanner entradaEscaner = new Scanner(System.in);
         CursadasBD cursadasBD=new CursadasBD();
         MateriaBD materiaBD=new MateriaBD();
+        List<Materia> materias = new ArrayList<>();
+        List<Cursadas> cursadasAll = new ArrayList<>();
+        List<Cursadas> cursadas = new ArrayList<>();
+        List<Integer> materias_id = new ArrayList<>();
+        List<Integer> cursadas_id = new ArrayList<>();
+        List<Cursadas> cursadasEnResumen = new ArrayList<>();
+        List<Integer> cursadasInscripto_idMateria = new ArrayList<>();
 
         System.out.println ("Seleccione una de las siguientes cursadas: \n");
 
-        for (Cursadas cursada: cursadasBD.listar()) {
+        //Validacion. Omitir materias aprobadas
+        alumno.getFoja().generarMateriasAprobadas();
+        materias.addAll(alumno.getFoja().getMateriasAprobadas());
+        for(Materia materia:materias){
+            materias_id.add(materia.getId());
+        }
+        cursadasAll.addAll(cursadasBD.listar());
+        for(Cursadas cursada : cursadasAll){
+            if(materias_id.contains(cursada.getMateria_id())){
+                continue;
+            }else{
+                cursadas.add(cursada);
+            }
+        }
+
+        //Validacion cupo
+        cursadas = cursadas.stream().filter(cursada->cursada.getCupo()>0).collect(Collectors.toList());
+
+        //Validacion. Omitir cursadas inscripto
+        for(Cursadas cursada:serviceAlumno.getCursadasInscripto()){
+            cursadasInscripto_idMateria.add(cursada.getMateria_id());
+        }
+        for(Cursadas cursada:cursadas){
+            if(cursadasInscripto_idMateria.contains(cursada.getMateria_id())){
+                continue;
+            }else{
+                cursadasEnResumen.add(cursada);
+            }
+        }
+
+        for (Cursadas cursada: cursadasEnResumen) {
+            cursadas_id.add(cursada.getId());
             System.out.println(cursada.getId() + " - "
                     + materiaBD.buscarPorID(cursada.getMateria_id()).info() + ", "
                     + cursada.getDias_y_horarios() + ". ");
         }
-
-        //***********************PROVISIORIO*************************//
-        AlumnoBD alumnoBD=new AlumnoBD();
-        Alumno alumno=alumnoBD.buscarPorMail("ogomez@unq.com");
-        //***********************************************************//
 
         //Invocamos un método sobre un objeto Scanner
         String entradaTeclado = entradaEscaner.nextLine ();
         Integer entrada = 0;
         try{
             entrada=Integer.parseInt(entradaTeclado);
-            if(entrada.intValue()>0&&entrada.intValue()<=cursadasBD.listar().size()){
+            if(cursadas_id.contains(entrada.intValue())){
                 //InscripcionesBD inscripcionesBD=new InscripcionesBD();
                 //inscripcionesBD.insertar(new Inscripciones(0,alumno.getId(),entrada.intValue()));
                 Cursadas cursada=cursadasBD.buscarPorID(entrada.intValue());
                 Materia materia = materiaBD.buscarPorID(cursada.getMateria_id());
-                ServiciosAlumno serviceAlumno = new ServiciosAlumno();
                 serviceAlumno.inscribirACursada(alumno.getId(), entrada.intValue());
 
                 this.clearScreen();
                 System.out.println("Te inscribiste en "+materia.info() + ", "
                         + cursada.getDias_y_horarios() +". \n");
-                this.menuPrincipalAlumnos();
+                this.menuPrincipalAlumnos(serviceAlumno, alumno);
             }
             else{
                 this.clearScreen();
                 System.out.println("Opción invalida, se vuelve al menu principal. \n");
-                this.menuPrincipalAlumnos();
+                this.menuPrincipalAlumnos(serviceAlumno, alumno);
             }
         }catch(Exception e){
             this.clearScreen();
             System.out.println("Opción invalida, se vuelve al menu principal. \n");
-            this.menuPrincipalAlumnos();
+            this.menuPrincipalAlumnos(serviceAlumno, alumno);
         }
     }
 
     public void clearScreen() {
-            for(int i=0;i<50;i++){
+            for(int i=0;i<20;i++){
                 System.out.print(" \n");
             }
     }

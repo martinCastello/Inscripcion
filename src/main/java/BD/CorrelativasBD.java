@@ -61,9 +61,13 @@ public class CorrelativasBD {
         MateriaBD materiaBD=new MateriaBD();
         this.insertar(materiaBD.buscarPorNombre("Matematica I"),materiaBD.buscarPorNombre("Matematica II"));
         this.insertar(materiaBD.buscarPorNombre("Objetos I"),materiaBD.buscarPorNombre("Objetos II"));
-        this.insertar(materiaBD.buscarPorNombre("Ingles I"),materiaBD.buscarPorNombre("Ingles II"));
         this.insertar(materiaBD.buscarPorNombre("Objetos II"),materiaBD.buscarPorNombre("Interfaces de usuario"));
         this.insertar(materiaBD.buscarPorNombre("Base de datos"),materiaBD.buscarPorNombre("Interfaces de usuario"));
+        this.insertar(materiaBD.buscarPorNombre("Objetos II"),materiaBD.buscarPorNombre("Estrategia de Persistencia"));
+        this.insertar(materiaBD.buscarPorNombre("Organizacion de computadoras"),materiaBD.buscarPorNombre("Redes de computadoras"));
+        this.insertar(materiaBD.buscarPorNombre("Introduccion a la programacion"),materiaBD.buscarPorNombre("Estructuras de datos"));
+        this.insertar(materiaBD.buscarPorNombre("Interfaces de usuario"),materiaBD.buscarPorNombre("Practicas del Desarrollo de Software"));
+        this.insertar(materiaBD.buscarPorNombre("Estrategia de Persistencia"),materiaBD.buscarPorNombre("Practicas del Desarrollo de Software"));
 
         cc.desconectar();
 

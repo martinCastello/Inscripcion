@@ -1,8 +1,11 @@
 import BD.*;
 
+import javax.swing.*;
+import java.io.IOException;
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         ConectorBD conectorBD = ConectorBD.getInstance();
         conectorBD.createAll();
@@ -28,6 +31,13 @@ public class Main {
         Menus menus = new Menus();
         menus.menuPrincipal();
 
+        //Lanterna menus = new Lanterna();
+
+        //Ventana menus = new Ventana();
+        //menus.setTitle("Bienvenido a UNQ");
+        //menus.setSize(800, 600);
+        //menus.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        //menus.setVisible(true);
 
     }
 
