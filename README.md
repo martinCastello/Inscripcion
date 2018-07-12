@@ -103,5 +103,7 @@ El objetivo es implementar parcialmente el modelo de Inscripción de Materias de
 
 ### Para tener en cuenta
 - bundle para cucumber en travis.
-
+### Caso de uso 
+enlace a los casos de uso 
+https://docs.google.com/document/d/1IwrvQ-1EkWjJIVBMIeD8dfdegVUd5KuVDJmOp38DMq8/edit
 [1]: https://travis-ci.org/
