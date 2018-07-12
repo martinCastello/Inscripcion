@@ -21,7 +21,7 @@ Nro | Nombre        | Legajo | Mail
 
 ### Burndown chart
 
-![captura de pantalla de 2018-07-10 21-58-39](https://user-images.githubusercontent.com/31372437/42545225-04f123cc-848d-11e8-858b-cbf2e204c62d.png)
+![captura de pantalla de 2018-07-11 11-38-16](https://user-images.githubusercontent.com/31372437/42579680-3b0c7610-84ff-11e8-8754-7e4453dc73c4.png)
 
 
 ### Retrospectiva:
